@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register')}}">
+            <div class="card-panel indigo lighten-5 z-depth-2">
+                <!-- FirstName -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-signature prefix"></i>
+                        <input id="firstname" name="firstname" type="text" class="validate">
+                        <label for="firstname">Firstname</label>
+                    </div>
+                </div>
+                <!-- Username -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="far fa-user prefix"></i>
+                        <input id="username" name="username" type="text" class="validate">
+                        <label for="username">Username</label>
+                    </div>
+                </div>
+                <!-- Password -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-lock prefix"></i>
+                        <input id="password" name="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>      
+                </div>
+                <!-- Register button  -->
+                <div class="row">
+                    <button class="col s4 offset-s1 btn-large red accent-3 text-shadow" type="submit">
+                        Cancel <i class="fas fa-ban"></i>
+                    </button>
+                    <button class="col s4 offset-s2 btn-large indigo accent-2 text-shadow" type="submit">
+                        Register <i class="fas fa-sign-in-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>     
+{% endblock %}
