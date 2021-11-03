@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="row">
+        <div class="col s12 center-align">
+            <h4>Register your account</h4>
+        </div>
+    </div>
+
+    <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register')}}">
             <div class="card-panel indigo lighten-5 z-depth-2">
                 <!-- FirstName -->
@@ -15,7 +21,7 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="far fa-user prefix"></i>
-                        <input id="username" name="username" type="text" class="validate">
+                        <input id="username" name="username" type="text" class="validate" required>
                         <label for="username">Username</label>
                     </div>
                 </div>
@@ -23,8 +29,16 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="fas fa-lock prefix"></i>
-                        <input id="password" name="password" type="password" class="validate">
-                        <label for="password">Password</label>
+                        <input id="password_1" minlength="5" maxlength="15" name="password_1" pattern="^[a-zA-Z0-9]{5,15}$" type="password" class="validate" required>
+                        <label for="password_1">Password</label>
+                    </div>      
+                </div>
+                <!-- Confirm Password -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-lock prefix"></i>
+                        <input id="password_2" minlength="5" maxlength="15"  name="password_2" pattern="^[a-zA-Z0-9]{5,15}$" type="password" class="validate" required>
+                        <label for="password_2">Confirm Password</label>
                     </div>      
                 </div>
                 <!-- Register button  -->
