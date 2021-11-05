@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="row">
+        <div class="col s12 center-align">
+            <h4>Log In</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login')}}">
+            <div class="card-panel indigo lighten-5 z-depth-2">
+                <!-- Username -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="far fa-user prefix"></i>
+                        <input id="username" name="username" type="text" class="validate" required>
+                        <label for="username">Input your username</label>
+                    </div>
+                </div>
+                <!-- Confirm Password -->
+                <div class="row">
+                    <div class="input-field col s12">
+                        <i class="fas fa-lock prefix"></i>
+                        <input id="password_2" minlength="5" maxlength="15"  name="password_2" pattern="^[a-zA-Z0-9]{5,15}$" type="password" class="validate" required>
+                        <label for="password_2">Input your password</label>
+                    </div>      
+                </div>
+                <!-- Log in button  -->
+                <div class="row">
+                    <button class="col s4 offset-s1 btn-large red accent-3 text-shadow" type="submit">
+                        Cancel <i class="fas fa-ban"></i>
+                    </button>
+                    <button class="col s4 offset-s2 btn-large indigo accent-2 text-shadow" type="submit">
+                        Log in <i class="fas fa-sign-in-alt"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
+        <div class="col s12">
+            <p class="center-align">
+                Not registered yet? <a href="{{ url_for('register') }}" class="light-blue-text text-darken-4">Click Here</a>
+            </p>
+        </div>
+    </div>
+
+{% endblock %}
