@@ -5,3 +5,11 @@
 .flashes h4 {
     line-height: 2;
 }
+
+.search-row {
+    padding-top: 30px;
+}
+
+.card-image img {
+    overflow: hidden;
+}

@@ -21,10 +21,10 @@
 
     <header>
         <nav>
-            <!-- Desktop Navbar -->
+            <!-- Materialize Desktop Navbar -->
             <div class="nav-wrapper text-shadow indigo accent-2">
-                <a href="#!" class="brand-logo"><i class="far fa-lemon"></i> My Recipes</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <a href="#" class="brand-logo"><i class="far fa-lemon"></i> My Recipes</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('all_recipes') }}">All Recipes</a></li>
                     {% if session.user %}
@@ -42,19 +42,19 @@
             </div>
         </nav>
 
-        <!-- Mobile Navbar -->
+        <!-- Materialize Mobile Sidebar -->
         <ul class="sidenav" id="mobile-demo">
             <li><a href="{{ url_for('all_recipes') }}">All Recipes</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="#">Add Recipe</a></li>
+                <li><a href="#">Add Recipe></a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">Log in</a></li>
             {% endif %}
             {% if session.user %}
                 <li><a href="{{ url_for('logout') }}">Log out</a></li>
             {% else %}
-            <li><a href="{{ url_for('register') }}">Register</a></li>
+                <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
         </ul>         
     </header>

@@ -23,7 +23,9 @@ mongo = PyMongo(app)
 @app.route("/all_recipes")
 def all_recipes():
     recipes = mongo.db.recipes.find()
-    return render_template("recipes.html", recipes=recipes)
+    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+
+    return render_template("recipes.html", recipes=recipes, food_tags=food_tags)
 
 
 @app.route("/register", methods=['GET', 'POST'])
