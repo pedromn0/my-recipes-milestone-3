@@ -46,7 +46,7 @@
                         <p>{{ recipe.estimated_time }} minutes</p>
                     </div>
                     <div class="card-action">
-                        <a href="#">View the recipe</a>
+                        <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View this recipe</a>
                     </div>
                 </div>
             </div>
