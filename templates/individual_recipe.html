@@ -1,14 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>I'm part of the injected content</h1>
-    {% for recipe in recipes %}
-        {{ recipe.recipe_name }}<br>
-        {{ recipe.comentary }}<br>
-        {{ recipe.url_picture }}<br>
-        {{ recipe.ingredients_list }}<br>
-        {{ recipe.method }}<br>
-        {{ recipe.created_by }}<br>
-        {{ recipe.estimated_time }}<br>
-        {{ recipe.food_type }}<br>
-    {% endfor %}
+    <div class="row">
+        <div class="col 12">
+            <h3 class="center-align">{{ recipe.recipe_name }}</h3><br>
+            <img class="responsive-img" src="{{ recipe.url_picture }}">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col 12">
+            <div class="card-panel teal">
+                <h5>Recipe: {{ recipe.recipe_name }}</h5><br>
+                <h6>Commentary</h6>
+                <p>{{ recipe.commentary }}</p>
+                <h6>Ingredients</h6>
+                <p>{{ recipe.ingredients_list }}</p>
+                <h6>Method</h6>
+                <p>{{ recipe.method }}</p><br>
+                <p>Created by: {{ recipe.created_by }}</p><br>
+                <p>Time estimated: {{ recipe.estimated_time }} minutes</p><br>
+                <p>{{ recipe.food_type }}</p><br>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}

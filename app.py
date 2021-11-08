@@ -106,7 +106,8 @@ def logout():
 
 @app.route("/view_recipe/<recipe_id>", methods=["GET"])
 def view_recipe(recipe_id):
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    recipe = mongo.db.recipes.find_one(
+        {"_id": ObjectId(recipe_id)})
 
     return render_template("individual_recipe.html", recipe=recipe)
 
