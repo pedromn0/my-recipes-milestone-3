@@ -117,6 +117,8 @@ def add_recipe():
     if request.method == "POST":
         ingredients_list = request.form.get('ingredients_list').split(';')
         method = request.form.get('method').split(';')
+        # food_id = mongo.db.recipes.find_one(
+        # {"_id": ObjectId(recipe_id)})
 
         recipe = {
             "recipe_name": request.form.get('recipe_name'),
@@ -128,7 +130,12 @@ def add_recipe():
             "method": method,
             "created_by": session['user']
         }
+
+        # user_food_id = {
+        #     ["food_id": food_id]
+        # }
         mongo.db.recipes.insert_one(recipe)
+        # mongo.db.users.update
         flash("Recipe Added with success!")
         return redirect(url_for('all_recipes'))
 
