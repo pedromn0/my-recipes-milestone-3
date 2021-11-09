@@ -143,6 +143,32 @@ def add_recipe():
     return render_template('add_recipe.html', food_tags=food_tags)
 
 
+@app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
+def edit_recipe(recipe_id):
+    if request.method == "POST":
+        ingredients_list = request.form.get('ingredients_list').split(';')
+        method = request.form.get('method').split(';')
+
+        submit = {
+            "recipe_name": request.form.get('recipe_name'),
+            "food_type": request.form.get('food_type'),
+            "estimated_time": request.form.get('estimated_time'),
+            "url_picture": request.form.get('url_picture'),
+            "commentary": request.form.get('commentary'),
+            "ingredients_list": ingredients_list,
+            "method": method,
+            "created_by": session['user']
+        }
+
+        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+        flash("Recipe Uptaded with success!")
+        return redirect(url_for('all_recipes'))
+
+    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+    return render_template('edit_recipe.html', food_tags=food_tags, recipe=recipe)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

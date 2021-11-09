@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <!-- Recipe Name and Picture  -->
     <div class="row">
         <div class="col 12">
             <h3 class="center-align">{{ recipe.recipe_name }}</h3><br>
@@ -9,6 +11,17 @@
         </div>
     </div>
 
+    <!-- Edit Btn -->
+    <div class="row">
+        <div class="col s12 center-align">
+            <a class="btn-large red text-shadow" href="{{ url_for('all_recipes') }}">Cancel <i class="fas fa-times-circle right"></i></a>
+            <a class="btn-large indigo accent-2 text-shadow" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+                Update Recipe <i class="far fa-edit right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Recipe Card -->
     <div class="row">
         <div class="col s12">
             <div class="card-panel teal z-depth-2">
@@ -21,6 +34,7 @@
                         <h5><i class="fas fa-tags"></i> {{ recipe.food_type }}</h5>
                     </div>
                 </div>
+                <!-- Estimated Time -->
                 <div class="row">
                     <div class="col s8">
                         <h6><i class="far fa-clock"></i> Time estimated: {{ recipe.estimated_time }} minutes</h6>
