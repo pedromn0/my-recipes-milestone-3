@@ -112,6 +112,30 @@ def view_recipe(recipe_id):
     return render_template("individual_recipe.html", recipe=recipe)
 
 
+@app.route("/add_recipe", methods=["GET", "POST"])
+def add_recipe():
+    if request.method == "POST":
+        ingredients_list = request.form.get('ingredients_list').split(';')
+        method = request.form.get('method').split(';')
+
+        recipe = {
+            "recipe_name": request.form.get('recipe_name'),
+            "food_type": request.form.get('food_type'),
+            "estimated_time": request.form.get('estimated_time'),
+            "url_picture": request.form.get('url_picture'),
+            "commentary": request.form.get('commentary'),
+            "ingredients_list": ingredients_list,
+            "method": method,
+            "created_by": session['user']
+        }
+        mongo.db.recipes.insert_one(recipe)
+        flash("Recipe Added with success!")
+        return redirect(url_for('all_recipes'))
+
+    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+    return render_template('add_recipe.html', food_tags=food_tags)
+
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

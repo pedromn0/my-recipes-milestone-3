@@ -23,13 +23,13 @@
         <nav>
             <!-- Materialize Desktop Navbar -->
             <div class="nav-wrapper text-shadow indigo accent-2">
-                <a href="#!" class="brand-logo"><i class="far fa-lemon"></i> My Recipes</a>
-                <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
+                <a href="{{ url_for('all_recipes') }}" class="brand-logo"><i class="far fa-lemon lime-text lighten-5"></i> My Recipes</a>
+                <a href="{{ url_for('all_recipes') }}" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{{ url_for('all_recipes') }}">All Recipes</a></li>
                     {% if session.user %}
                         <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                        <li><a href="#">Add Recipe</a></li>
+                        <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
                     {% else %}
                         <li><a href="{{ url_for('login') }}">Log in</a></li>
                     {% endif %}
@@ -47,7 +47,7 @@
             <li><a href="{{ url_for('all_recipes') }}">All Recipes</a></li>
             {% if session.user %}
                 <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
-                <li><a href="#">Add Recipe</a></li>
+                <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
             {% else %}
                 <li><a href="{{ url_for('login') }}">Log in</a></li>
             {% endif %}
