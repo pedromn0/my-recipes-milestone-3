@@ -22,7 +22,7 @@
     <header>
         <nav>
             <!-- Materialize Desktop Navbar -->
-            <div class="nav-wrapper text-shadow indigo accent-2">
+            <div class="nav-wrapper text-shadow lime-text lighten-5 indigo accent-2">
                 <a href="{{ url_for('all_recipes') }}" class="brand-logo"><i class="far fa-lemon lime-text lighten-5"></i> My Recipes</a>
                 <a href="{{ url_for('all_recipes') }}" data-target="mobile-demo" class="sidenav-trigger right"><i class="fas fa-bars"></i></a>
                 <ul class="right hide-on-med-and-down">
@@ -88,5 +88,15 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     {% block scripts %}
     {% endblock  %}
+
+    <footer class="page-footer lime darken-2">
+        <div class="footer-copyright">
+          <div class="container">
+          © 2021 Copyright My Recipes
+          <a class="grey-text text-lighten-4 right" href="https://github.com/pedromn0/my-recipes-milestone-3" target="_a"><i class="fab fa-github"></i> GitHub Project Link</a>
+          </div>
+        </div>
+    </footer>
+
 </body>
 </html>
