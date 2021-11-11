@@ -1,32 +1,40 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <!-- Recipe Name and Picture  -->
-    <div class="row">
-        <div class="col 12">
-            <h3 class="center-align">{{ recipe.recipe_name }}</h3><br>
-            <div class="col s8 offset-s2">
-                <img class="responsive-img" src="{{ recipe.url_picture }}">
-            </div>
-        </div>
-    </div>
-
-    <!-- Edit Btn -->
-    <div class="row">
-        <div class="col s12 center-align">
-            <a class="btn-large red text-shadow" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">Delete <i class="far fa-trash-alt right"></i></a>
-            <a class="btn-large indigo accent-2 text-shadow" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
-                Update Recipe <i class="far fa-edit right"></i>
-            </a>
-        </div>
-    </div>
-
     <!-- Recipe Card -->
     <div class="row">
         <div class="col s12">
-            <div class="card-panel teal z-depth-2">
+            <!-- Recipe Name and Picture  -->
+            <div class="card-panel cyan accent-3 darken-2 z-depth-3">
+                <div class="center-align col s6 offset-s3">
+                    <div class="row">
+                        <div class="col s12">
+                            <h4 class="center-align">{{ recipe.recipe_name }}</4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            <div class="row">
+                                <div class="col s10 offset-s1">
+                                    <img class="responsive-img z-depth-3" src="{{ recipe.url_picture }}" alt="{{ recipe.recipe_name }}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Edit Btn -->
+                    <div class="row">
+                        <div class="col s12 center-align">
+                            {% if session.user|lower == recipe.created_by|lower %}
+                                <a class="btn red text-shadow" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">Delete <i class="far fa-trash-alt right"></i></a>
+                                <a class="btn indigo accent-2 text-shadow" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
+                                    Edit Recipe <i class="far fa-edit right"></i>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
                 <!-- Recipe Header Name and Tag -->
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s8">
                         <h5><i class="fas fa-utensils"></i> {{ recipe.recipe_name }}</h5><br>
                     </div>
@@ -35,20 +43,20 @@
                     </div>
                 </div>
                 <!-- Estimated Time -->
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s8">
                         <h6><i class="far fa-clock"></i> Time estimated: {{ recipe.estimated_time }} minutes</h6>
                     </div>
                 </div>
                 <!-- Recipe Commentary -->
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s12">
                         <h6><i class="far fa-comment-alt"></i> Commentary</h6>
                         <p>{{ recipe.commentary }}</p>
                     </div>
                 </div>
                 <!-- Ingredient List -->
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s12">
                         <h6><i class="far fa-list-alt"></i> Ingredients</h6>
                         {% for ingredient in recipe.ingredients_list %}
@@ -59,7 +67,7 @@
                     </div>
                 </div>
                 <!-- Method of Preparation -->
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s12">
                         <h6><i class="fas fa-list-ol"></i> Method</h6>
                         {% for step in recipe.method %}
@@ -69,7 +77,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="row">
+                <div class="row card-recipe">
                     <div class="col s8">
                         <p><i class="far fa-user prefix"></i> Created by: {{ recipe.created_by }}</p><br>
                     </div>

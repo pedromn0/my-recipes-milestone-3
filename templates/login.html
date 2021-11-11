@@ -8,7 +8,7 @@
 
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login')}}">
-            <div class="card-panel indigo lighten-5 z-depth-2">
+            <div class="card-panel cyan accent-3 z-depth-2">
                 <!-- Username -->
                 <div class="row">
                     <div class="input-field col s12">
@@ -27,9 +27,9 @@
                 </div>
                 <!-- Log in button  -->
                 <div class="row">
-                    <button class="col s4 offset-s1 btn-large red accent-3 text-shadow" type="submit">
+                    <a href="{{ url_for('all_recipes') }}" class="col s4 offset-s1 btn-large red accent-3 text-shadow">
                         Cancel <i class="fas fa-ban"></i>
-                    </button>
+                    </a>
                     <button class="col s4 offset-s2 btn-large indigo accent-2 text-shadow" type="submit">
                         Log in <i class="fas fa-sign-in-alt"></i>
                     </button>

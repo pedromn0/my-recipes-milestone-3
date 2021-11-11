@@ -1,5 +1,5 @@
 .text-shadow {
-    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.65);
 }
 
 .flashes h4 {
@@ -10,6 +10,34 @@
     padding-top: 30px;
 }
 
-.card-image img {
+.card-image {
     overflow: hidden;
+}
+
+.card .card-image .card-title {
+    background-color: rgba(0,0,0,0.5);
+    padding: 0px;
+    font-size: 19px;
+}
+
+.image-card{
+    height: 100%;
+    width: 100%;
+}
+
+/* Sticky Footer */
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Individual recipe */
+
+.card-recipe i {
+    color: #1a237e;
 }

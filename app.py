@@ -25,7 +25,18 @@ def all_recipes():
     recipes = mongo.db.recipes.find()
     food_tags = mongo.db.food_tags.find().sort("food_type", 1)
 
-    return render_template("recipes.html", recipes=recipes, food_tags=food_tags)
+    return render_template(
+        "recipes.html", recipes=recipes, food_tags=food_tags)
+
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipes = mongo.db.recipes.find({"$text": {"$search": query}})
+    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+    
+    return render_template(
+        "recipes.html", recipes=recipes, food_tags=food_tags)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -117,8 +128,6 @@ def add_recipe():
     if request.method == "POST":
         ingredients_list = request.form.get('ingredients_list').split(';')
         method = request.form.get('method').split(';')
-        # food_id = mongo.db.recipes.find_one(
-        # {"_id": ObjectId(recipe_id)})
 
         recipe = {
             "recipe_name": request.form.get('recipe_name'),
@@ -131,11 +140,7 @@ def add_recipe():
             "created_by": session['user']
         }
 
-        # user_food_id = {
-        #     ["food_id": food_id]
-        # }
         mongo.db.recipes.insert_one(recipe)
-        # mongo.db.users.update
         flash("Recipe Added with success!")
         return redirect(url_for('all_recipes'))
 
@@ -166,7 +171,8 @@ def edit_recipe(recipe_id):
 
     recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
     food_tags = mongo.db.food_tags.find().sort("food_type", 1)
-    return render_template('edit_recipe.html', food_tags=food_tags, recipe=recipe)
+    return render_template(
+        'edit_recipe.html', food_tags=food_tags, recipe=recipe)
 
 
 @app.route('/delete_recipe/<recipe_id>')
