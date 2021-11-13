@@ -34,8 +34,20 @@ Finally this project provided to me some interesting outcomes in my learning pro
     3. [Acknowledgements](#acknowledgements)
 
 ## UX
- 
-The UX was idealized to be simple and not distractive, keeping the attention of the user to the functionality of the game. However, it is important to accommodate the functionality at the same time that the visuals maint the main idea of the application. After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
+
+This project borned from the idea to create a simple but functional tool - online cookbook - to help the user in their regular task to store recipes in a safe place and have access to that information everywhere. With this in mind the UX was tought to accomplish that but keeping some visual appeling but at the some point keep things simple and intuitive.
+
+In that matter Materialize was the choice to keep good visual with vibrant colors and but intuitive user experience.
+
+Pallete for main aspects as cards and navbars:
+- #c2185b - class pink darken-2 in Materialize
+- ##00e5ff - class cyan accent-3 in Materialize
+
+Pallete for small details and fonts
+- Black
+- #1a237e - class indigo-text text-darken-4 in Materialize
+
+ After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
 
 <p align="center">
 <img src="assets/images/gameboy.png" width="350" height="350">
@@ -46,10 +58,10 @@ Embeded with this concept and the user stories was possible to formulate the fra
 ### User Stories
 
 #### External user’s goal
-Have fun playing a memory card game themed with Pokemon within a iteractive interface. 
+Store their own favourite recipes in simple way filling a simple form, allowing access everywhere and also have the possibility to quickly share the recipes. 
 
 #### Site owner's goal
-Make the game fun and simple by allowing everyone to play a visually satisfying experience.
+Deliver a simple but satisfying usability of the web app to make possible maintain the users utilising the toll and then learn collecting experience and feedback to improve the functionality and eventually create a subscription service.
 
 ### Wireframe
 
@@ -127,24 +139,26 @@ The initial design suffered some changes becoming simpler to facilitate the impl
 
 ## Technologies Used
 
-All the Technologies utilised to built this landing page can be found bellow with the respective links.
+All the Technologies utilised to built this web app can be found bellow with the respective links.
 
 ### Languages
 - [HTML](https://en.wikipedia.org/wiki/HTML) to build the whole structure of the landing page.
-- [CSS](https://en.wikipedia.org/wiki/CSS) to style all the webiste.
-- [JavaScript](https://en.wikipedia.org/wiki/JavaScript) to build the majority of the interactions and the logical for this game.
+- [CSS](https://en.wikipedia.org/wiki/CSS) to style the webiste.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript), more specifically [Jquery](https://jquery.com/) was use it to personalize some materialize components.
+- [Python](https://www.python.org/) to build majority of the backend instructions on app.py file.
 
 ### Frameworks and others
 
 - [Gitpod](https://www.gitpod.io/) as the code editor.
-- [Bootstrap 5.0](https://getbootstrap.com/docs/5.0/getting-started/introduction/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more solutions pre built.
-- [Google Fonts](https://fonts.google.com/) for both fonts utilised in the project.
+- [Materialize](https://materializecss.com/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more pre built solutions.
+- [Flask](https://flask.palletsprojects.com/en/2.0.x/) was used in conjunction with Python to build the functional banckend logic of the web app.
+- [MongoDB](https://www.mongodb.com/) is the database for this project where the documents created by user are store as for example the recipes, the user information and food tags.
 - [Git](https://git-scm.com/) was used as tool to control the version of the project.
 - [Git Hub](https://github.com/) to store the project with versionament control
-- [Github pages](https://pages.github.com/) to deploy the live project.
+- [Heroku](https://pages.github.com/) to deploy the live project.
 - [Balsamiq](https://balsamiq.com/) to wireframe the ideia of the website.
 - [Am I responsive](http://ami.responsivedesign.is/#) to help visualize the webiste in different screens sizes and get a print of it.
-- [PokeAPI](https://pokeapi.co/) was responsible for all the request about Pokemon utilised in the cards. 
+
 
 ## Testing
 

@@ -63,8 +63,9 @@ def register():
 
             # log user into 'session' cookie
             session['user'] = request.form.get("username").lower()
+            session['user_firstname'] = request.form.get("firstame").lower()
             flash("Registration Successful")
-            return redirect(url_for("profile", username=session["user"]))
+            return redirect(url_for("profile", username=session["user"], firstname=session['user_firstname']))
 
         else:
             flash("Passwords didn’t match. Try again.")
