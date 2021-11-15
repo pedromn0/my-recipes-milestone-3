@@ -127,6 +127,7 @@ def view_recipe(recipe_id):
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
     if request.method == "POST":
+        user = mongo.db.users.find_one({"username": session['user']})
         ingredients_list = request.form.get('ingredients_list').split(';')
         method = request.form.get('method').split(';')
 
@@ -138,7 +139,8 @@ def add_recipe():
             "commentary": request.form.get('commentary'),
             "ingredients_list": ingredients_list,
             "method": method,
-            "created_by": session['user']
+            "created_by": session['user'],
+            "user_id": ObjectId(user['_id'])
         }
 
         mongo.db.recipes.insert_one(recipe)

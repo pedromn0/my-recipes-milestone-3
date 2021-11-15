@@ -30,6 +30,7 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    background-color: #fafafa;
 }
 
 main {
@@ -43,6 +44,11 @@ main {
 }
 
 /* Forms */
+
+/* Placeholder */
+::placeholder {
+    color: #1a227e5e;
+}
 
 /* label color */
 .input-field label {
