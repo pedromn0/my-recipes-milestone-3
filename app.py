@@ -102,9 +102,12 @@ def login():
 def profile(username):
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
+    user = mongo.db.users.find_one({"username": session['user']})
+    user_id = ObjectId(user['_id'])
+    recipes = mongo.db.recipes.find({"user_id": user_id})
 
     if session["user"]:
-        return render_template("profile.html", username=username)
+        return render_template("profile.html", username=username, recipes=recipes)
 
     return redirect(url_for('login'))
 
@@ -154,6 +157,7 @@ def add_recipe():
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if request.method == "POST":
+        user = mongo.db.users.find_one({"username": session['user']})
         ingredients_list = request.form.get('ingredients_list').split(';')
         method = request.form.get('method').split(';')
 
@@ -165,7 +169,8 @@ def edit_recipe(recipe_id):
             "commentary": request.form.get('commentary'),
             "ingredients_list": ingredients_list,
             "method": method,
-            "created_by": session['user']
+            "created_by": session['user'],
+            "user_id": ObjectId(user['_id'])
         }
 
         mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)

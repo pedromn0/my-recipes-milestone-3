@@ -1,11 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <!-- Header's Profile -->
     <div class="row">
         <div class="col s12 center-align">
             <h4>Profile</h4>
         </div>
     </div>
 
+    <!-- User Name Profile -->
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-panel cyan accent-3 z-depth-2">
@@ -15,5 +18,53 @@
             </div>
         </div>
     </div>
+
+    <!-- Recipes Header -->
+    <div class="row">
+        <div class="col s12 center-align">
+            <h5>Your Recipes</h5>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for recipe in recipes %}
+        <div class="col s12 m6 l6 xl4">
+            <div class="card medium hoverable cyan accent-3">
+                <div class="card-image">
+                    <img src="{{ recipe.url_picture }}" alt="{{ recipe.recipe_name}}" class="image-card">
+                    <span class="card-title">{{ recipe.recipe_name }}</span>
+                </div>
+                <div class="card-content indigo-text text-darken-4">
+                    <p><i class="fas fa-tags"></i> {{ recipe.food_type }}</p>
+                    <p><i class="far fa-clock"></i> {{ recipe.estimated_time }} minutes</p>
+                </div>
+                <div class="card-action">
+                    <a class="btn-small pink darken-1" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+     <!-- Materialize Card - User's Quick Recipe Quick View Card -->
+     <!-- <div class="row">
+        {% for user_recipe in user_recipes %}
+            <div class="col s12 m6 l6 xl4">
+                <div class="card medium hoverable cyan accent-3">
+                    <div class="card-image">
+                        <img src="{{ user_recipe.url_picture }}" alt="{{ user_recipe.recipe_name}}" class="image-card">
+                        <span class="card-title">{{ user_recipe.recipe_name }}</span>
+                    </div>
+                    <div class="card-content indigo-text text-darken-4">
+                        <p><i class="fas fa-tags"></i> {{ user_recipe.food_type }}</p>
+                        <p><i class="far fa-clock"></i> {{ user_recipe.estimated_time }} minutes</p>
+                    </div>
+                    <div class="card-action">
+                        <a class="btn-small pink darken-1" href="{{ url_for('view_recipe', recipe_id=user_recipe._id) }}">View recipe</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div> -->
 
 {% endblock %}
