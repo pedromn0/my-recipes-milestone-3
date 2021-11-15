@@ -25,7 +25,21 @@
                     <div class="row">
                         <div class="col s12 center-align">
                             {% if session.user|lower == recipe.created_by|lower %}
-                                <a class="btn red text-shadow" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">Delete <i class="far fa-trash-alt right"></i></a>
+                            <!-- Modal Trigger -->
+                                <a class="btn red text-shadow modal-trigger" href="#modal1">Delete <i class="far fa-trash-alt right"></i></a>
+
+                                <!-- Modal Structure -->
+                                <div id="modal1" class="modal">
+                                    <div class="modal-content">
+                                        <h4>Delete Action</h4>
+                                        <p>Do you really intend to delete this? This is a irreversible act.</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{{ url_for('all_recipes') }}">Cancel</a>
+                                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
+                                    </div>
+                                </div>
+                                <!-- <a class="btn red text-shadow" href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}">Delete <i class="far fa-trash-alt right"></i></a> -->
                                 <a class="btn indigo accent-2 text-shadow" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}">
                                     Edit Recipe <i class="far fa-edit right"></i>
                                 </a>
