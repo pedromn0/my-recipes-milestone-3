@@ -23,9 +23,13 @@
                 <!-- Food Tag Selection -->
                 <div class="input-field col s8 center-align">
                     <select id="food_type" name="food_type" class="validate" required>
-                        <option value="" disabled selected>Choose your option</option>
+                        <option value="" disabled>Choose food tag</option>
                         {% for food_tag in food_tags %}
-                            <option value="{{ food_tag.food_type }}" selected>{{ food_tag.food_type }}</option>
+                            {% if food_tag.food_type == recipe.food_type %}
+                                <option value="{{ food_tag.food_type }}" selected>{{ food_tag.food_type }}</option>
+                            {% else %}
+                            <option value="{{ food_tag.food_type }}">{{ food_tag.food_type }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
                     <label for="food_type"><i class="fas fa-tags"></i> Food Category</label>

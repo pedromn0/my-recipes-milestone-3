@@ -129,65 +129,82 @@ def view_recipe(recipe_id):
 
 @app.route("/add_recipe", methods=["GET", "POST"])
 def add_recipe():
-    if request.method == "POST":
-        user = mongo.db.users.find_one({"username": session['user']})
-        ingredients_list = request.form.get('ingredients_list').split(';')
-        method = request.form.get('method').split(';')
+    if "user" in session:
+        if request.method == "POST":
+            user = mongo.db.users.find_one({"username": session['user']})
+            ingredients_list = request.form.get(
+                'ingredients_list').splitlines()
+            method = request.form.get('method').splitlines()
 
-        recipe = {
-            "recipe_name": request.form.get('recipe_name'),
-            "food_type": request.form.get('food_type'),
-            "estimated_time": request.form.get('estimated_time'),
-            "url_picture": request.form.get('url_picture'),
-            "commentary": request.form.get('commentary'),
-            "ingredients_list": ingredients_list,
-            "method": method,
-            "created_by": session['user'],
-            "user_id": ObjectId(user['_id'])
-        }
+            recipe = {
+                "recipe_name": request.form.get('recipe_name'),
+                "food_type": request.form.get('food_type'),
+                "estimated_time": request.form.get('estimated_time'),
+                "url_picture": request.form.get('url_picture'),
+                "commentary": request.form.get('commentary'),
+                "ingredients_list": ingredients_list,
+                "method": method,
+                "created_by": session['user'],
+                "user_id": ObjectId(user['_id'])
+            }
 
-        mongo.db.recipes.insert_one(recipe)
-        flash("Recipe Added with success!")
-        return redirect(url_for('all_recipes'))
+            mongo.db.recipes.insert_one(recipe)
+            flash("Recipe Added with success!")
+            return redirect(url_for('all_recipes'))
 
-    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
-    return render_template('add_recipe.html', food_tags=food_tags)
+        food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+        return render_template('add_recipe.html', food_tags=food_tags)
+
+    else:
+        flash("You must be logged in to have access to this page")
+        return redirect("login")
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    if request.method == "POST":
-        user = mongo.db.users.find_one({"username": session['user']})
-        ingredients_list = request.form.get('ingredients_list').split(';')
-        method = request.form.get('method').split(';')
+    if "user" not in session:
+        # flash("You must be logged in to have access to this page")
+        return redirect("no_authorized")
 
-        submit = {
-            "recipe_name": request.form.get('recipe_name'),
-            "food_type": request.form.get('food_type'),
-            "estimated_time": request.form.get('estimated_time'),
-            "url_picture": request.form.get('url_picture'),
-            "commentary": request.form.get('commentary'),
-            "ingredients_list": ingredients_list,
-            "method": method,
-            "created_by": session['user'],
-            "user_id": ObjectId(user['_id'])
-        }
+    else:
+        if request.method == "POST":
+            user = mongo.db.users.find_one({"username": session['user']})
+            ingredients_list = request.form.get(
+                'ingredients_list').splitlines()
+            method = request.form.get('method').splitlines()
 
-        mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-        flash("Recipe Uptaded with success!")
-        return redirect(url_for('all_recipes'))
+            submit = {
+                "recipe_name": request.form.get('recipe_name'),
+                "food_type": request.form.get('food_type'),
+                "estimated_time": request.form.get('estimated_time'),
+                "url_picture": request.form.get('url_picture'),
+                "commentary": request.form.get('commentary'),
+                "ingredients_list": ingredients_list,
+                "method": method,
+                "created_by": session['user'],
+                "user_id": ObjectId(user['_id'])
+            }
 
-    recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
-    return render_template(
-        'edit_recipe.html', food_tags=food_tags, recipe=recipe)
+            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+            flash("Recipe Uptaded with success!")
+            return redirect(url_for('all_recipes'))
+
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+        return render_template(
+            'edit_recipe.html', food_tags=food_tags, recipe=recipe)
 
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
-    mongo.db.recipes.remove({"_id": ObjectId(recipe_id)})
+    mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
     flash("Recipe deleted with success!")
     return redirect(url_for('all_recipes'))
+
+
+@app.route('/no_authorized')
+def no_authorized():
+    return render_template("no_authorized.html")
 
 
 if __name__ == "__main__":

@@ -35,7 +35,7 @@
                                         <p>Do you really intend to delete this? This is a irreversible act.</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="{{ url_for('all_recipes') }}">Cancel</a>
+                                        <a class="grey-text darken-4" href="{{ url_for('all_recipes') }}">Cancel</a>
                                         <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}" class="modal-close waves-effect waves-green btn-flat">Confirm</a>
                                     </div>
                                 </div>
