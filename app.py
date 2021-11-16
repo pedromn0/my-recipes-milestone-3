@@ -34,7 +34,7 @@ def search():
     query = request.form.get("query")
     recipes = mongo.db.recipes.find({"$text": {"$search": query}})
     food_tags = mongo.db.food_tags.find().sort("food_type", 1)
-    
+
     return render_template(
         "recipes.html", recipes=recipes, food_tags=food_tags)
 
@@ -43,7 +43,7 @@ def search():
 def register():
     password1 = request.form.get("password_1")
     password2 = request.form.get("password_2")
- 
+
     if request.method == "POST":
         existing_user = mongo.db.users.find_one(
             {"username": request.form.get("username").lower()})
@@ -63,9 +63,9 @@ def register():
 
             # log user into 'session' cookie
             session['user'] = request.form.get("username").lower()
-            session['user_firstname'] = request.form.get("firstame").lower()
             flash("Registration Successful")
-            return redirect(url_for("profile", username=session["user"], firstname=session['user_firstname']))
+            return redirect(url_for(
+                "profile", username=session["user"]))
 
         else:
             flash("Passwords didn’t match. Try again.")
@@ -81,12 +81,12 @@ def login():
 
         if existing_user:
             if check_password_hash(
-                existing_user['password'], request.form.get("password_2")):
-                    session["user"] = request.form.get("username").lower()
-                    flash("Welcome, {}".format(
-                        request.form.get('username')))
-                    return redirect(url_for(
-                            "profile", username=session["user"]))
+                    existing_user['password'], request.form.get("password_2")):
+                        session["user"] = request.form.get("username").lower()
+                        flash("Welcome, {}".format(
+                            request.form.get('username')))
+                        return redirect(url_for(
+                                "profile", username=session["user"]))
             else:
                 flash("Invalid Username and or Password")
                 return redirect(url_for('login'))
@@ -107,7 +107,8 @@ def profile(username):
     recipes = mongo.db.recipes.find({"user_id": user_id})
 
     if session["user"]:
-        return render_template("profile.html", username=username, recipes=recipes)
+        return render_template(
+            "profile.html", username=username, recipes=recipes)
 
     return redirect(url_for('login'))
 
@@ -135,22 +136,42 @@ def add_recipe():
             ingredients_list = request.form.get(
                 'ingredients_list').splitlines()
             method = request.form.get('method').splitlines()
+            url_picture = request.form.get('url_picture')
+            url_replace = ('https://i.pinimg.com/originals/'
+                           'd9/55/5f/d9555f88a53f6c19ef8acbb2bd679511.jpg')
+            if url_picture:
+                recipe = {
+                    "recipe_name": request.form.get('recipe_name'),
+                    "food_type": request.form.get('food_type'),
+                    "estimated_time": request.form.get('estimated_time'),
+                    "url_picture": url_picture,
+                    "commentary": request.form.get('commentary'),
+                    "ingredients_list": ingredients_list,
+                    "method": method,
+                    "created_by": session['user'],
+                    "user_id": ObjectId(user['_id'])
+                }
 
-            recipe = {
-                "recipe_name": request.form.get('recipe_name'),
-                "food_type": request.form.get('food_type'),
-                "estimated_time": request.form.get('estimated_time'),
-                "url_picture": request.form.get('url_picture'),
-                "commentary": request.form.get('commentary'),
-                "ingredients_list": ingredients_list,
-                "method": method,
-                "created_by": session['user'],
-                "user_id": ObjectId(user['_id'])
-            }
+                mongo.db.recipes.insert_one(recipe)
+                flash("Recipe Added with success!")
+                return redirect(url_for('all_recipes'))
 
-            mongo.db.recipes.insert_one(recipe)
-            flash("Recipe Added with success!")
-            return redirect(url_for('all_recipes'))
+            else:
+                recipe = {
+                    "recipe_name": request.form.get('recipe_name'),
+                    "food_type": request.form.get('food_type'),
+                    "estimated_time": request.form.get('estimated_time'),
+                    "url_picture": url_replace,
+                    "commentary": request.form.get('commentary'),
+                    "ingredients_list": ingredients_list,
+                    "method": method,
+                    "created_by": session['user'],
+                    "user_id": ObjectId(user['_id'])
+                }
+
+                mongo.db.recipes.insert_one(recipe)
+                flash("Recipe Added with success!")
+                return redirect(url_for('all_recipes'))
 
         food_tags = mongo.db.food_tags.find().sort("food_type", 1)
         return render_template('add_recipe.html', food_tags=food_tags)
