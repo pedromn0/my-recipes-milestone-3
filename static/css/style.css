@@ -25,6 +25,13 @@
     width: 100%;
 }
 
+/* Btn */
+
+.btn {
+  margin: 5px;
+}
+
+
 /* Sticky Footer */
 body {
     display: flex;
