@@ -1,6 +1,6 @@
 import os
 from flask import (
-    Flask, flash, render_template, 
+    Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -100,16 +100,18 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    user = mongo.db.users.find_one({"username": session['user']})
-    user_id = ObjectId(user['_id'])
-    recipes = mongo.db.recipes.find({"user_id": user_id})
+    if "user" in session:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+        user = mongo.db.users.find_one({"username": session['user']})
+        user_id = ObjectId(user['_id'])
+        recipes = mongo.db.recipes.find({"user_id": user_id})
 
-    if session["user"]:
-        return render_template(
-            "profile.html", username=username, recipes=recipes)
+        if session["user"]:
+            return render_template(
+                "profile.html", username=username, recipes=recipes)
 
+    flash("You must be logged in to have access to this page")
     return redirect(url_for('login'))
 
 
@@ -178,16 +180,12 @@ def add_recipe():
 
     else:
         flash("You must be logged in to have access to this page")
-        return redirect("login")
+        return redirect(url_for("login"))
 
 
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
-    if "user" not in session:
-        # flash("You must be logged in to have access to this page")
-        return redirect("no_authorized")
-
-    else:
+    if "user" in session:
         if request.method == "POST":
             user = mongo.db.users.find_one({"username": session['user']})
             ingredients_list = request.form.get(
@@ -215,12 +213,20 @@ def edit_recipe(recipe_id):
         return render_template(
             'edit_recipe.html', food_tags=food_tags, recipe=recipe)
 
+    else:
+        flash("You must be logged in to have access to this page")
+        return redirect(url_for("login"))
+
 
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
-    mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
-    flash("Recipe deleted with success!")
-    return redirect(url_for('all_recipes'))
+    if "user" in session:
+        mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+        flash("Recipe deleted with success!")
+        return redirect(url_for('all_recipes'))
+
+    flash("You must be logged in to have access to this page")
+    return redirect(url_for("no_authorized"))
 
 
 @app.route('/no_authorized')
