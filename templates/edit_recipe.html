@@ -15,7 +15,7 @@
             <div class="row">
                 <!-- Recipe Name-->
                 <div class="input-field col s12">
-                    <input placeholder="Input the Recipe Name" id="recipe_name" name="recipe_name" type="text" minlength="5" maxlength="40" class="validate" value="{{ recipe.recipe_name }}" required>
+                    <input placeholder="Recipe Name" id="recipe_name" name="recipe_name" type="text" minlength="5" maxlength="40" class="validate" value="{{ recipe.recipe_name }}" required>
                     <label for="recipe_name"><i class="fas fa-utensils"></i> Recipe Name</label>
                 </div>
             </div>
@@ -43,21 +43,21 @@
             <!-- URL Picture -->
             <div class="row">
                 <div class="input-field col s12">
-                    <input placeholder="Paste the URL here" id="url_picture" name="url_picture" type="text" minlength="5" value="{{ recipe.url_picture }}" class="validate">
+                    <input placeholder="URL's Picture" id="url_picture" name="url_picture" type="text" minlength="5" value="{{ recipe.url_picture }}" class="validate">
                     <label for="url_picture"><i class="far fa-image"></i> URL Picture</label>
                 </div>
             </div>
             <!-- Commentary Text Area -->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="Optional space for any general commentary" id="commentary" name="commentary" class="materialize-textarea">{{ recipe.commentary }}</textarea>
+                    <textarea placeholder="Recipe commentary" id="commentary" name="commentary" class="materialize-textarea">{{ recipe.commentary }}</textarea>
                     <label for="commentary"><i class="far fa-comment-alt"></i> Commentary</label>
                 </div>
             </div>
             <!-- Ingredients List -->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="Separate each ingredient using semicolon -> ;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">{% for ingredient in recipe.ingredients_list %}
+                    <textarea placeholder="One item per line;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">{% for ingredient in recipe.ingredients_list %}
                         {{- ingredient -}}
                     {% endfor %}</textarea>
                     <label for="ingredients_list"><i class="far fa-list-alt"></i> Ingredients List</label>
@@ -66,7 +66,7 @@
             <!-- Preparation Method -->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="Separate each step using semicolon -> ;" id="method" name="method" class="materialize-textarea">{% for step in recipe.method %}{{- step -}}{% endfor %}</textarea>
+                    <textarea placeholder="One step per line" id="method" name="method" class="materialize-textarea">{% for step in recipe.method %}{{- step -}}{% endfor %}</textarea>
                     <label for="method"><i class="fas fa-list-ol"></i> Method of Preparation</label>
                 </div>
             </div>
