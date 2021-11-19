@@ -17,8 +17,9 @@ Finally this project provided to me some interesting outcomes in my learning pro
 1. [UX](#ux)
     1. [User Stories](#user-stories)
     1. [Wireframe](#wireframe)
+    1. [Database](#Schema)
 1. [Features](#features)
-    1. [Existing Features](#existing-features)
+    1. [Existing Features Explanation](#existing-features-explanation)
     1. [Features Left To Implement](#features-left-to-implement)
 1. [Technologies Used](#technologies-used)
 1. [Testing](#testing)
@@ -53,67 +54,75 @@ Pallete for small details and fonts
 - Black
 - #1a237e - class indigo-text text-darken-4 in Materialize
 
- After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
-
-
+After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
 
 Embeded with this concept and the user stories was possible to formulate the framework.
 
 ### User Stories
 
 #### External user’s goal
-Store their own favourite recipes in simple way filling a simple form, allowing access everywhere and also have the possibility to quickly share the recipes. 
+Have their own access to a tool which would possibilitate store their own recipes in a simple, secure and intuitive manner. Also have access to the recipes everywhere they are and or whethever devices.
 
 #### Site owner's goal
-Deliver a simple but satisfying usability of the web app to make possible maintain the users utilising the toll and then learn collecting experience and feedback to improve the functionality and eventually create a subscription service.
+Initially offer satisfactory usability of the web application to allow users to keep using the tools and learning the process like a beta test. Later, collect user experience and feedback to improve functionality and eventually create a subscription service.
 
 ### Wireframe
 
-In result of the above, the concept of the game was created taking in consideration some research and the user stories. The wireframe keep things simple but add a simple touch of nostalgia trying to attach an attractiveness with the basic functionality of this game.
+As a result of the above, the concept of the website was idealised taking in consideration some research and the user stories. The wireframe was design to deliver all the functions needed to create, read, update and delete the recipes (CRUD actions) but also guaranteeing a basic secure functions just allowing the right user to have access to some of that functions as UPDATE and DELETE, but allowing access to read and create their own recipes.
 
-The initial idea was to create the memory game and build on it another phase called battle mode, which is predefined in this wireframe. However, it was not possible to implement the bonus mode due to lack of time.
+The initial wireframe consist in: 
 
-The initial wireframe basically consist: 
+1. Navbar with the following options - All Recipes, Profile, Add Recipes, Log in and Log out. Depending on the user in session or not some options will be shown or not.
+2. Sidebar with the following options - All Recipes, Profile, Add Recipes, Log in and Log out. Depending on the user in session or not some options will be shown or not.
+3. All Recipes home pages consist of a search bar and the all cards that function as quick viewers to the recipes available to everyone. In each card there is a button to access the complete information of the recipe.
+4. Each recipe page has an image, general commentary, list of ingredients, method or preparation, time estimated, food tag and who created that recipe. 
+5. Add recipe consist of the same information provided in the recipe page but in format of a form to be filled and storaged, plus two buttons cancel and add to action that function.
+6. Edit recipe brings all the data filled in the add page with the possibility to edit them and action this function with the addition of three buttons cancel, delete and update.
+7. Register page is a form simple page to fill with the credentials to have full access to the functionalities of the website. The inputs necessary are username, password and confirm password. This option was posterior alterated along the developing process to firstname, username, password and confirm password.
+8. Login page is a form to allow access and check the users credentials as username and password.
+9. User profile is a page to redirect the user after the correct log in where the user has all recipes created by them in one unique space. Over this page they have the possibility to access the full recipe after selecting the recipe quick view card.
 
-1. Navbar with three options - Home, Rules and About it.
-2. Button to select level and one to select the option yes or no for the battle mode afterwards.
-3. Three buttons to interact with major commands - Start, Restart and confirm selection.
-4. The grid with the 20 cards.
-5. At the end the score and the number of movements.
-
-Desktop Version
+See in details clicking on this [Desktop Version](static/assets/project_images/wireframes/original_wireframes/desktop.png)
 <p align="center">
-<img src="assets/images/desktop.png" width="90%" height="auto">
+<img src="static/assets/project_images/wireframes/wireframes_img/desktop.png" width="90%" height="auto">
 </p>
 
-Tablet Version
+See in details clicking on this [Tablet Version](static/assets/project_images/wireframes/original_wireframes/tablet.png)
 <p align="center">
-<img src="assets/images/tablet.png" width="90%" height="auto">
+<img src="static/assets/project_images/wireframes/wireframes_img/tablet.png" width="90%" height="auto">
 </p>
 
-Mobile Version
+See in details clicking on this [Mobile Version](static/assets/project_images/wireframes/original_wireframes/mobile.png)
 <p align="center">
-<img src="assets/images/mobile.png" width="90%" height="auto">
+<img src="static/assets/project_images/wireframes/wireframes_img/mobile.png" width="90%" height="auto">
 </p>
 
 ## Features
 
-The initial design suffered some changes becoming simpler to facilitate the implementation of the game. Below are all the functionalities and parts that were possible and not to implement.
+The initial design suffered some fewers changes to accommodate better user experience and the overal functionality of the app. Below are all the actual functionalities that were possible to implement and those which was not possible to do it.
  
-1. Navbar;
+1. Navbar & Sidebar for general navigation;
 
-2. Buttons for control;
+2. All Recipes page - Search function, recipe quick view cards with a button to access the full recipe;
+
+3. Individual recipe page - full visualization of the recipe, for users correct logged in and owner of the recipes Delete and Update function; 
     
-3. Grid systems;
+4. Profile's page - Welcome message and user's own recipe quick view cards with a button to access the full recipe;
 
-4. The cards;
+5. Add recipe page - an empty form with all the inputs to add a new recipe and one buttons to action the data insertion;
 
-5. Scores;
+6. Edit recipe page - a filled form with with recipe’s information with two buttons cancel and update;
+
+7. Log in page - simple form to check the user's credential username and password;
+
+8. Log out page - a navbar link responsabile for end an user session;
+
+9. Register page - a form to collect initial and register the initial user credentials.
     
-### Existing Features
+### Existing Features Explanation
 
-#### Navbar
-- The **Navbar** utilized came from bootstrap and was eddited in the visual to match the visual identity of the project. This feature allows the user reach links for home, rules and abou it.
+#### Navbar & Sidebar
+- The **Navbar** & **Sidebar** were implemented on this project to complete their functional task to be the main form of navigation through all the possibilities offered by the website. They were designed by Materielize Frame work to  from bootstrap and was eddited in the visual to match the visual identity of the project. This feature allows the user reach links for home, rules and abou it.
 
     - The **Rules** is a page to explain the simple rules of this game.
 
