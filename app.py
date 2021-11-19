@@ -101,15 +101,21 @@ def login():
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
     if "user" in session:
-        username = mongo.db.users.find_one(
-            {"username": session["user"]})["username"]
-        user = mongo.db.users.find_one({"username": session['user']})
-        user_id = ObjectId(user['_id'])
-        recipes = mongo.db.recipes.find({"user_id": user_id})
 
-        if session["user"]:
-            return render_template(
-                "profile.html", username=username, recipes=recipes)
+        if session['user'] == username:
+            username = mongo.db.users.find_one(
+                {"username": session["user"]})["username"]
+            user = mongo.db.users.find_one({"username": session['user']})
+            user_id = ObjectId(user['_id'])
+            recipes = mongo.db.recipes.find({"user_id": user_id})
+
+            if session["user"]:
+                return render_template(
+                    "profile.html", username=username, recipes=recipes)
+
+        else:
+            flash("You do not have access to this")
+            return redirect(url_for('no_authorized'))
 
     flash("You must be logged in to have access to this page")
     return redirect(url_for('login'))
@@ -186,32 +192,42 @@ def add_recipe():
 @app.route("/edit_recipe/<recipe_id>", methods=["GET", "POST"])
 def edit_recipe(recipe_id):
     if "user" in session:
-        if request.method == "POST":
-            user = mongo.db.users.find_one({"username": session['user']})
-            ingredients_list = request.form.get(
-                'ingredients_list').splitlines()
-            method = request.form.get('method').splitlines()
-
-            submit = {
-                "recipe_name": request.form.get('recipe_name'),
-                "food_type": request.form.get('food_type'),
-                "estimated_time": request.form.get('estimated_time'),
-                "url_picture": request.form.get('url_picture'),
-                "commentary": request.form.get('commentary'),
-                "ingredients_list": ingredients_list,
-                "method": method,
-                "created_by": session['user'],
-                "user_id": ObjectId(user['_id'])
-            }
-
-            mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
-            flash("Recipe Uptaded with success!")
-            return redirect(url_for('all_recipes'))
-
+        user = mongo.db.users.find_one({"username": session['user']})
+        user_id = ObjectId(user['_id'])
         recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
-        food_tags = mongo.db.food_tags.find().sort("food_type", 1)
-        return render_template(
-            'edit_recipe.html', food_tags=food_tags, recipe=recipe)
+        recipe_user_id = ObjectId(recipe['user_id'])
+
+        if user_id == recipe_user_id:
+            if request.method == "POST":
+                user = mongo.db.users.find_one({"username": session['user']})
+                ingredients_list = request.form.get(
+                    'ingredients_list').splitlines()
+                method = request.form.get('method').splitlines()
+
+                submit = {
+                    "recipe_name": request.form.get('recipe_name'),
+                    "food_type": request.form.get('food_type'),
+                    "estimated_time": request.form.get('estimated_time'),
+                    "url_picture": request.form.get('url_picture'),
+                    "commentary": request.form.get('commentary'),
+                    "ingredients_list": ingredients_list,
+                    "method": method,
+                    "created_by": session['user'],
+                    "user_id": ObjectId(user['_id'])
+                }
+
+                mongo.db.recipes.update({"_id": ObjectId(recipe_id)}, submit)
+                flash("Recipe Uptaded with success!")
+                return redirect(url_for('all_recipes'))
+
+            recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+            food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+            return render_template(
+                'edit_recipe.html', food_tags=food_tags, recipe=recipe)
+
+        else:
+            flash("You do not have access to this")
+            return redirect(url_for('no_authorized'))
 
     else:
         flash("You must be logged in to have access to this page")
@@ -221,9 +237,19 @@ def edit_recipe(recipe_id):
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
     if "user" in session:
-        mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
-        flash("Recipe deleted with success!")
-        return redirect(url_for('all_recipes'))
+        user = mongo.db.users.find_one({"username": session['user']})
+        user_id = ObjectId(user['_id'])
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe_user_id = ObjectId(recipe['user_id'])
+
+        if user_id == recipe_user_id:
+            mongo.db.recipes.delete_one({"_id": ObjectId(recipe_id)})
+            flash("Recipe deleted with success!")
+            return redirect(url_for('all_recipes'))
+
+        else:
+            flash("You do not have access to this")
+            return redirect(url_for('no_authorized'))
 
     flash("You must be logged in to have access to this page")
     return redirect(url_for("no_authorized"))

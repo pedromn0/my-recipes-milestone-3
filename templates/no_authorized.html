@@ -2,15 +2,15 @@
 {% block content %}
     <div class="row">
         <div class="col s12 center-align">
-            <h4>Page not authorized. Go back to home page or log in.</h4>
+            <h4>Oh no... That is unauthorized page. Go back to home page.</h4>
         </div>
     </div>
 
     <div class="row">
         <div class="col s12">
-            <p class="center-align">
-                Not registered yet? <a href="{{ url_for('register') }}" class="light-blue-text text-darken-4">Click Here</a>
-            </p>
+            <h6 class="center-align">
+                <a href="{{ url_for('all_recipes') }}" class="light-blue-text text-darken-4">Click Here</a>
+            </h6>
         </div>
     </div>
 
