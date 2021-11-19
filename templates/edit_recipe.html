@@ -57,16 +57,27 @@
             <!-- Ingredients List -->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="One item per line;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">{% for ingredient in recipe.ingredients_list %}
-                        {{- ingredient -}}
-                    {% endfor %}</textarea>
+                    <!-- Jinja template solution to bring each array index item to another line inside the tag textarea -->
+                    <textarea placeholder="One item per line;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">
+                    {%- if recipe != "NEW" -%} 
+                        {%- for ingredient in recipe.ingredients_list -%} 
+                            {{ ingredient }} &#13;&#10;
+                        {%- endfor -%}
+                    {%- endif -%}</textarea>
                     <label for="ingredients_list"><i class="far fa-list-alt"></i> Ingredients List</label>
                 </div>
             </div>
             <!-- Preparation Method -->
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea placeholder="One step per line" id="method" name="method" class="materialize-textarea">{% for step in recipe.method %}{{- step -}}{% endfor %}</textarea>
+                    <!-- Jinja template solution to bring each array index item to another line inside the tag textarea -->
+                    <textarea placeholder="One step per line" id="method" name="method" class="materialize-textarea">
+                    {%- if recipe != "NEW" -%} 
+                        {%- for step in recipe.method -%} 
+                            {{ step }} &#13;&#10;
+                        {%- endfor -%}
+                    {%- endif -%}
+                    </textarea>
                     <label for="method"><i class="fas fa-list-ol"></i> Method of Preparation</label>
                 </div>
             </div>

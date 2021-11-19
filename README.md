@@ -1,5 +1,5 @@
 # My Recipe - Online Cookbook
-<img src="static/assets/images/responsiveness.png" width="100%">
+<img src="static/assets/project_images/responsiviness/responsiveness.png" width="100%">
 
 [Live project link](https://my-recipes-ms3.herokuapp.com/all_recipes)
 
@@ -35,9 +35,15 @@ Finally this project provided to me some interesting outcomes in my learning pro
 
 ## UX
 
-This project borned from the idea to create a simple but functional tool - online cookbook - to help the user in their regular task to store recipes in a safe place and have access to that information everywhere. With this in mind the UX was tought to accomplish that but keeping some visual appeling but at the some point keep things simple and intuitive.
+This project borned from the idea to create a simple but functional tool - online cookbook - to help the user in their regular task to store recipes in a safe place and then have access to that information everywhere. With this in mind the UX was taught to accomplish that in an intuitive way but also keeping some visual appeal.
 
-In that matter Materialize was the choice to keep good visual with vibrant colors and but intuitive user experience.
+To help with this goal was chosen for me the Materialize framework to keep the constancy of the material design at some point that keeps the things simple and very intuitive. Materialize provides a big range of components, helpers and a good bunch of colors pre-formatat which possiblitated me to concentrate more in the functionality of the app but balancing that with good user experience.
+
+It is important to mention the research done to understand which kind of existing website could help to understand more about the necessities of the user in this area. One website that worked as a reference was the [Jamie Oliver](https://www.jamieoliver.com/). This website sounded like a good answer for the users interested in getting an online recipe. What was noted about that was that the website uses cards with images and has a direct communication about recipe’s information which was understood by me as a good reference thinking about user experience. Normally people interested in online recipes are interested in something quick, where with a few glances at the page they will have all the information needed. For example, how much time, which ingredientes I will need and how to prepare?
+
+<p align="center">
+<img src="static/assets/project_images/references/jamie_oliver.png" width="80%">
+</p>
 
 Pallete for main aspects as cards and navbars:
 - #c2185b - class pink darken-2 in Materialize
@@ -49,9 +55,7 @@ Pallete for small details and fonts
 
  After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
 
-<p align="center">
-<img src="assets/images/gameboy.png" width="350" height="350">
-</p>
+
 
 Embeded with this concept and the user stories was possible to formulate the framework.
 
