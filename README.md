@@ -3,7 +3,7 @@
 
 [Live project link](https://my-recipes-ms3.herokuapp.com/all_recipes)
 
-## Project Introduction 
+## **Project Introduction**
 
 The scope of this project consists in exercise the knowledge learn up to this point with the [Code Institute](https://codeinstitute.net/all-access-coding-challenge/?utm_term=code%20institute&utm_campaign=a%26c_SEA_IRL_BR_Brand_Code_Institute&utm_source=adwords&utm_medium=ppc&hsa_acc=8983321581&hsa_cam=14304747355&hsa_grp=128775288209&hsa_ad=539453915484&hsa_src=g&hsa_tgt=kwd-319867646331&hsa_kw=code%20institute&hsa_mt=e&hsa_net=adwords&hsa_ver=3&gclid=CjwKCAiAvriMBhAuEiwA8Cs5lb4K7BEL5Kg1c8ZXfzdHRSPwEYkb_aMKSzaeFovYBDDbML-RP8UVoBoCyp4QAvD_BwE) -  software development course - and put in practise the conjunction of front end and Backend and also a database, in this case MONGODB, to operate the essential CRUD functionality with a functional app.
  
@@ -13,7 +13,7 @@ The project idea came from a course suggestion but also a personal wish to provi
 
 Finally this project provided to me some interesting outcomes in my learning process as developer. In this project was possible to learn the fundamentals of [Python](https://www.python.org/), interact with two new frameworks - [Materialize](https://materializecss.com/) and [Flask](https://flask.palletsprojects.com/en/2.0.x/) - as it was possible as well to understand how to query and design a non-relational database - [MongoDB](https://www.mongodb.com/) - to operate CRUD operations and have access a secure informations or also manipulate them. Another important aspect was to practise basic notions in how to build a safe login and logout utilizing[Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/).
  
-## Table of Contents
+## **Table of Contents**
 1. [UX](#ux)
     1. [User Stories](#user-stories)
     1. [Wireframe](#wireframe)
@@ -33,7 +33,7 @@ Finally this project provided to me some interesting outcomes in my learning pro
     2. [Media](#media)
     3. [Acknowledgements](#acknowledgements)
 
-## UX
+## **UX**
 
 This project borned from the idea to create a simple but functional tool - online cookbook - to help the user in their regular task to store recipes in a safe place and then have access to that information everywhere. With this in mind the UX was taught to accomplish that in an intuitive way but also keeping some visual appeal.
 
@@ -57,15 +57,15 @@ After a search period and taking in consideration the user stories it was decide
 
 Embeded with this concept and the user stories was possible to formulate the framework.
 
-### User Stories
+### **User Stories**
 
-#### External user’s goal
+#### **External user’s goal**
 Have their own access to a tool which would possibilitate store their own recipes in a simple, secure and intuitive manner. Also have access to the recipes everywhere they are and or whethever devices.
 
-#### Site owner's goal
+#### **Site owner's goal**
 Initially offer satisfactory usability of the web application to allow users to keep using the tools and learning the process like a beta test. Later, collect user experience and feedback to improve functionality and eventually create a subscription service.
 
-### Wireframe
+### **Wireframe**
 
 As a result of the above, the concept of the website was idealised taking in consideration some research and the user stories. The wireframe was design to deliver all the functions needed to create, read, update and delete the recipes (CRUD actions) but also guaranteeing a basic secure functions just allowing the right user to have access to some of that functions as UPDATE and DELETE, but allowing access to read and create their own recipes.
 
@@ -96,7 +96,7 @@ See in details clicking on this [Mobile Version](static/assets/project_images/wi
 <img src="static/assets/project_images/wireframes/wireframes_img/mobile.png" width="90%" height="auto">
 </p>
 
-## Features
+## **Features**
 
 The initial design suffered some fewers changes to accommodate better user experience and the overall functionality of the app. Below are all the actual functionalities that were possible to implement and those which were not possible to do it.
  
@@ -118,9 +118,9 @@ The initial design suffered some fewers changes to accommodate better user exper
 
 9. Register page - a form to collect initial and register the initial user credentials.
     
-### Existing Features
+### **Existing Features**
 
-#### Base html and Extended usage
+#### **Base html and Extended usage**
 
 The first important feature but one that figures just behind the scenes is the advent of [Jinja-extension](https://jinja.palletsprojects.com/en/3.0.x/templates/?highlight=extend#template-file-extension) which allows a very interesting possibility to create one base html file and then extend its use to all other html templates necessary through the project. This makes easier to implement any update in the html files.
 
@@ -144,7 +144,7 @@ Then at the top of each new html file it is necessary to extend the base html:
 {% block content %}
 ```
 
-#### Navbar & Sidebar
+#### **Navbar & Sidebar**
 
 - The **Navbar** & **Sidebar** were implemented on this project to complete their functional task to be the main form of navigation through all the possibilities offered by the website. They were designed by Materialize Framework and edited in the visual to match the identity of this project. This feature allows the user to reach links for All Recipes, Profile, Add Recipes, Log in, Log out and Register.
 
@@ -168,7 +168,7 @@ Then at the top of each new html file it is necessary to extend the base html:
     {% endif %}
     ````
 
-#### All Recipes page 
+#### **All Recipes page** 
  In the first place there is a search bar which will look for recipe name or tag name. It is necessary to use the buttons to complete an action such as for finding a recipe pressing the search button or clearing the result bringing back the regular recipes.
 
 These feature was possible thanks to the use of [MongoDB indexes](https://docs.mongodb.com/manual/indexes/) that was created based in the collection recipes but more specifically with the document recipe_name and food_type. 
@@ -188,31 +188,31 @@ def search():
 
 The cards utilized to show the basic information come from [Materialize](https://materializecss.com/cards.html) and they were stylised to being in consonance with the general UX idea. The idealisation of the cards was to summarise the main recipe information in a visual manner. Following this guidance the cards showed the time estimated, name, picture of the recipe, food tag or classification and a link for the full recipe.
 
-#### Cards
+#### **Cards**
  - The **cards** utilised came from bootstrap as well but they were heavily personalised to fit the project criteria’s. Each card is composed for different HTML elements such as:
     - frontFace container in which is contained the image or sprite from Pokemon API.
     - card-body container in which is contained one "h5" tag for the Pokemon name and an "p" tag for the type of the Pokemon request from the API.
     - backface container which is the red part of the card which it is removed after clicking on it.    
 
-#### Scores
+#### **Scores**
  - The **scores** works to countability the number of wrong moves and the number of paired cards found.
     - **Pairs found** increments every two correct cards found by the user at the maximum of 10 because the total of cards are 20.
     - **Movements** increments every two incorrect selection to this score. The less the better.
 
-### Features Left to Implement
+### **Features Left to Implement**
 - The second phase of the game called battle mode was not possible to implement due the lack of time. The battle mode would consist of after the memory game the user would select six Pokemon from the pool available from the already finished memory game. With this selection of 6 Pokemon the program would randomly choose the equivalent number of Pokemon (6). The user would select the order of reveal of 6 Pokemon and then the disclose or battle between the types would occur one by one (fire vs water). The number of victorious Pokemon would multiply the score of the user.
 
-## Technologies Used
+## **Technologies Used**
 
 All the Technologies utilised to built this web app can be found bellow with the respective links.
 
-### Languages
+### **Languages**
 - [HTML](https://en.wikipedia.org/wiki/HTML) to build the whole structure of the landing page.
 - [CSS](https://en.wikipedia.org/wiki/CSS) to style the webiste.
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript), more specifically [Jquery](https://jquery.com/) was use it to personalize some materialize components.
 - [Python](https://www.python.org/) to build majority of the backend instructions on app.py file.
 
-### Frameworks and others
+### **Frameworks and others**
 
 - [Gitpod](https://www.gitpod.io/) as the code editor.
 - [Materialize](https://materializecss.com/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more pre built solutions.
@@ -226,7 +226,7 @@ All the Technologies utilised to built this web app can be found bellow with the
 - [Am I responsive](http://ami.responsivedesign.is/#) to help visualize the webiste in different screens sizes and get a print of it.
 
 
-## Testing
+## **Testing**
 
 The automated test utilised were [Google Lighthouse](https://developers.google.com/web/tools/lighthouse) to test general performance, [W3C Markup](https://validator.w3.org/nu/) validation service for the find any inconsistency in the HTML and  [W3C Jigsaw CSS](https://jigsaw.w3.org/css-validator/#validate_by_input) validation service for CSS and [Jshin](https://jshint.com/) for JavaScript.
 
@@ -261,108 +261,60 @@ PEP8 Online result after correction for app.py
 <img src="static/assets/tests/pep8_validation/after.png" width="90%" height="auto">
 </p>
 
-### Mannual Tests and Notable Bugs
-The website was manually tested to check if it was working properly. After success attempts I can confirm in the best of my capabilities that the website is working as initially was intend. 
+### **Mannual Tests and Notable Bugs**
+The website was manually tested to check if it was working properly in all functionalities. Many attempts to run the app were executed and I can confirm in all the best of my capabilities it is working as initially was intended. All redirections, check of password, the CRUD operations, all links logged in or logged out and a big learning process with defensive programming. Above are some importants outcomes coming from those tests and meeting with my mentor that shows some important isssues that should be to tackle. 
 
-#### More than three clicks
-The game provides the capacity to interact with the user through clicking on the cards revealing their content and then checking the value of the cards. If the chosen one is right then will increment one point in the score, but if the selection was wrong the increment will happen in the movements indicating that this selection was wrong. Other than that if the selection was right the user will receive the visual feedback of the cards maintained it revealed, otherwise those cards will be hidden again indicating for the user that they need to try again.
+#### **Empty URL's Picture input form**
+One noticed issue is related to the URL's Picture input that is not a requirement for filling the form due to turning this experience to fill the form a little bit friendly. However, allowing the image card without an image would bring that aspect of the card empty, breaking the regular format of this Materialize component. The solution implemented was via backend through a if statement which will check the front end if that input was empty and then completing that input with a standard image. 
 
-1. All that was tested following the regular flow:
-   1. Start the game
-   2. Wait two seconds for all cards being loaded
-   3. Click on two whised cards and then wait for the visual feedback and increment on the scores or movements.
- 
-One error found during these tests and already addressed was related to the capacity of the user clicks three or more cards. In that way the logic of the game would be broken resulting in a wrong incrementation of the scores and revealing more than two cards which is not allowed.
- 
-To solve that was utilised an logic to give boolean value for a global variable called **lockBoard** of false. In the first if statement it is checked if this is true and the function will return and stop the sequence to go on revealing more cards. If the value is false it will go on and at the end of this function will replace the value of **lockBoard** to true for the cycle of checks could happen again.
-
+As it is possile to see in the add_recipe function was added two variable. One wite regular reques.form.get and other with the valueo of the standard Picture URL.
 ```
-function matchCards (event) {
-     if (lockBoard) return;
-     if (this === firstCard) return;
-
-    this.classList.remove('backFace');
-        
-    
-     if (!flippedCard) {
-         flippedCard = true;
-         firstCard = this;
-         return;
-     }
- 
-     secondCard = this;
-    lockBoard = true;
-             
-     checkForMatch(firstCard, secondCard);
- }
-```
-This segment of logic goes on and at the very end where all the variable values were reinstated to the initial states trough the function **resetBoard** to makes the whole sequece works again.
-
-```
-function resetBoard() {
-    [flippedCard, lockBoard] = [false, false];
-    [firstCard, secondCard] = [null, null];
-} 
+url_picture = request.form.get('url_picture')
+url_replace = ('https://i.pinimg.com/originals/'
+                'd9/55/5f/d9555f88a53f6c19ef8acbb2bd679511.jpg')
 ```
 
-#### Shuffle at any time
-
-Another test being executed was to guarantee once more that the logic of the game would not be broken. In this case it is related to the shuffle button that remixes the pokemon array of objects coming from the API through the fetching. This is a feature to guarantee a better mix.
-
+With that was done a simple check if that field was empty or not:
 ```
-function randomPokeArray(event) {
-    selectedPokeArray.sort(() => Math.random() - 0.5);
-     setTimeout(displayPokeInfo, 200);
-}
-
-let btnShuffle = document.getElementById('btnShuffle');
-btnShuffle.addEventListener("click", randomPokeArray,randomPokeArray);
-```
-
-2. The test consisted in
-   1. Start the game
-   2. Wait two seconds for all cards being loaded
-   3. After that click on the shuffle button.
-
-That made me realize that I was guaranteeing to the user the possibility to change the order of the cards at any time of the game, even after the matching of pairs. That in this case would be breaking the game of increment points for cards that could not be the same any more because the shuffle will make that cards change information and not the position. In this case was possible to for example have a pair of charizard and then click on shuffle and that two cards being displayed as Squirtle and bulbasaur for example.
-
-To avoid that the solution was creat a check attached to the event listener click that would be analysing how many pairs were found through the element where the increment of pair were registered and then being more than 0 the function itself called **disabledBtnShuffle** would be disabling the shuffle button.
-
-```
-function enableBtnShuffle(event) {
-    btnShuffle.removeAttribute("disabled", "");
-}
-
-function disabledBtnShuffle (event) {
-    if (parseInt(document.getElementById("score").innerText) > 0){
-        btnShuffle.setAttribute("disabled", "")
-    }
-}
+if url_picture:
+    recipe = {
+                    "recipe_name": request.form.get('recipe_name'),
+                    "food_type": request.form.get('food_type'),
+                    "estimated_time": request.form.get('estimated_time'),
+                    "url_picture": url_picture,
+                    "commentary": request.form.get('commentary'),
+                    "ingredients_list": ingredients_list,
+                    "method": method,
+                    "created_by": session['user'],
+                    "user_id": ObjectId(user['_id'])
+                }
 ```
 
-Following the same and avoid the shuffle button being displayed before the game could run a similar logic was created. It was given to the html of the button to shuffle the attribute disabled. With that and after listening a event on the button start the function ***enableBtnShuffle** will remove that attribute enabling the button.
-
+Or if it is false I would insert in the database the all the same structure above but replacing url_picutre key value for this:
 ```
-function enableBtnShuffle(event) {
-    btnShuffle.removeAttribute("disabled", "");
-}
+"url_picture": url_replace,
 ```
 
-Those two sequences of logic give the button the appropriate functionality to allow the function shuffle just happens up to the moment that the user finds the first pair of cards.
+This solutioned the issue preserving overall good visual for those cards. 
 
-This game or website does not provide any console error because all of them were corrected before the submission.
+#### **Defensive Programming**
 
-### Responsiveness
+This was something really important brought from my mentor in the meetings. This is understandably an important aspect of this project because it brought light to the security aspect of the data being stored in the database by taking care of the url route and information passed through it. So in that way a two layer of security was implemented to preserve or avoid that someone could understand the route for example "delete_recipe/recipe" and or even edit the recipe without being initially authorized to do that.
+
+The two layers implemented were first about checking if there is a user session logged and that solution was possible thanks to Flask. The second layer of protection is related to the check between the user_id logged and the user_id storaged in the recipe collection. This second form of protections works assuring the same user that is trying to delete or update or even getting access to user Profile will be redirect avoiding anyone with the right route and information to have access in something that they would not be allowed to do so.
+
+
+### **Responsiveness**
 
 This project was developed to work in a diverse range of screens. All the components from Materialize and it’s Grid system are responsive and were added to them with personalized CSS to improve their capabilities in delivering a better UX and achieve satisfactory usage. With big screens more information will be shown in more comfortable form by the website having enough responsiveness to scale in small screens.
 
 As explained this project will work fine in at least 3 different sizes Desktop,Tablet and mobile. To achieve this the website has been tested on several possible devices, from 11 "or 13" inch Macs, Google Chrome developer tools, variable Android phones of friends and relatives.
 
-## Deployment
+## **Deployment**
 
 To deploy this project I utilised some of the mentioned technologies above to facilitate this process. This project was deployed on Heroku and connected with MongoDB.
 
-### Creating a Repository and installing Flask
+### **Creating a Repository and installing Flask**
 
 1. The first step were created a repository on GitHub with the name **my-recipes-milestone-3**
 2. Installed the **Gitpod** extension for **Google Chrome**;
@@ -374,7 +326,7 @@ To deploy this project I utilised some of the mentioned technologies above to fa
 8. And also install dnspython with the command pip3 install dnspython in the terminal.
 9. The next step is to create a file called requirements.txt in our root folder. The command in the terminal for that is touch requirements.txt.
 
-### Connecting MongoDB to your repository 
+### **Connecting MongoDB to your repository** 
 1. First you need to create a free account with [MongoDB](https://www.mongodb.com/).
 2. Once created it will be possible to create a new cluster where the database will be seated.
 3. In our new cluster we then are allowed to create a database by clicking on the button create a new database.
@@ -405,7 +357,7 @@ if os.path.exists("env.py"):
     import env
 ```
 
-### Deploying to Heroku
+### **Deploying to Heroku**
 
 1. The next step is to deploy the project for Heroku.
 2. First get back to your gitpod workspace or code editor.
@@ -455,7 +407,7 @@ mongo = PyMongo(app)
 It is done.
 
 
-### Making a Local Clone
+### **Making a Local Clone**
 
 1. Log in to your [GitHub](https://github.com/), locate the repository [pedromn0/my-recipes-milestone-3](https://github.com/pedromn0/my-recipes-milestone-3).
 2. Inside the repository locate the button Code and then click on "Clone or download".
@@ -465,7 +417,7 @@ It is done.
 6. Type `git clone`, and then paste the URL you copied earlier.
 
 
-## Credits
+## **Credits**
 
 All images utilised to fill some recipes were taken from the same source the [Jamie Oliver](https://www.jamieoliver.com/) website as the content of the recipes as well.
 
@@ -486,7 +438,7 @@ Code instiute Slack channel was utilised as a referece to solve one bug related 
 {%- endif -%}</textarea>
 ```
 
-### Media
+### **Media**
 
 - Only one image has a different source, this pciture was utilised as an standard picture in case the user do not paste any Picture URL in the add recipe form. This is the [reference](https://www.pinterest.ie/pin/846395323697472657/) for that image as a source being Pinterest.
 
@@ -498,6 +450,6 @@ Code instiute Slack channel was utilised as a referece to solve one bug related 
 
 - The Pokeball image utilised called [pokeLogo](https://www.pikpng.com/pngvi/xxRxTm_brik-pixel-art-pokemon-pokeball-clipart/) in the project came from this website https://www.pikpng.com/
 
-### Acknowledgements
+### **Acknowledgements**
 
-- It is important to note all the support from my mentor Chris Quin which helped me since the beginning to guide me and instruct me through some difficulties.
+- It is important to note the support from my mentor Chris Quin which helped me since the beginning guiding my ideas as instruct me through some difficulties steps to implement this project.
