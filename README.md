@@ -17,7 +17,7 @@ Finally this project provided to me some interesting outcomes in my learning pro
 1. [UX](#ux)
     1. [User Stories](#user-stories)
     1. [Wireframe](#wireframe)
-    1. [Database](#Schema)
+    1. [Database](#database)
 1. [Features](#features)
     1. [Existing Features](#existing-features)
     1. [Features Left To Implement](#features-left-to-implement)
@@ -44,16 +44,6 @@ It is important to mention the research done to understand which kind of existin
 <p align="center">
 <img src="static/assets/project_images/references/jamie_oliver.png" width="80%">
 </p>
-
-Pallete for main aspects as cards and navbars:
-- #c2185b - class pink darken-2 in Materialize
-- ##00e5ff - class cyan accent-3 in Materialize
-
-Pallete for small details and fonts
-- Black
-- #1a237e - class indigo-text text-darken-4 in Materialize
-
-After a search period and taking in consideration the user stories it was decided to borrow the palette's colors from the classic Game-boy, bringing a certain feeling of nostalgia and the connection with the main user of this application.
 
 Embeded with this concept and the user stories was possible to formulate the framework.
 
@@ -95,6 +85,54 @@ See in details clicking on this [Mobile Version](static/assets/project_images/wi
 <p align="center">
 <img src="static/assets/project_images/wireframes/wireframes_img/mobile.png" width="90%" height="auto">
 </p>
+
+## Database
+
+The database chose for this project was the MongoDB for all well non capabilites of this resource and for fit the project requirements.
+
+The desing or Schema was defined as bellow:
+
+- **Database and Collections name**
+```
+my_recipes
+    food_tags
+    recipes
+    users
+```
+### Collections
+
+- **food_tags**
+```
+{
+    "_id":{"ObjectId":""},
+    "food_type":"Tea Treatments"
+}
+```
+- **recipes**
+```
+{
+    "_id":{"ObjectId":""},
+    "recipe_name":"string",
+    "food_type":"string",
+    "estimated_time":"string",
+    "url_picture":"",
+    "commentary":"string",
+    "ingredients_list":[Array],
+    "method":[Array],
+    "created_by":"string",
+    "user_id":{"ObjectId":""}
+}
+```
+
+- **users**
+```
+{
+    "_id":{"ObjectId":""},
+    "firstname":"string",
+    "username":"string",
+    "password":"werkzeug_salted_harsh"
+}
+```
 
 ## **Features**
 
@@ -188,19 +226,13 @@ def search():
 
 The cards utilized to show the basic information come from [Materialize](https://materializecss.com/cards.html) and they were stylised to being in consonance with the general UX idea. The idealisation of the cards was to summarise the main recipe information in a visual manner. Following this guidance the cards showed the time estimated, name, picture of the recipe, food tag or classification and a link for the full recipe.
 
-#### **Cards**
- - The **cards** utilised came from bootstrap as well but they were heavily personalised to fit the project criteria’s. Each card is composed for different HTML elements such as:
-    - frontFace container in which is contained the image or sprite from Pokemon API.
-    - card-body container in which is contained one "h5" tag for the Pokemon name and an "p" tag for the type of the Pokemon request from the API.
-    - backface container which is the red part of the card which it is removed after clicking on it.    
-
-#### **Scores**
- - The **scores** works to countability the number of wrong moves and the number of paired cards found.
-    - **Pairs found** increments every two correct cards found by the user at the maximum of 10 because the total of cards are 20.
-    - **Movements** increments every two incorrect selection to this score. The less the better.
+#### **Profile's page**
+This is the page where the user is redirected everytime it is log in with theirs credentials and where they can have access as a specie of a shortcut of all their own recipes making easier to, read, edit or delete any of them.
+ 
 
 ### **Features Left to Implement**
-- The second phase of the game called battle mode was not possible to implement due the lack of time. The battle mode would consist of after the memory game the user would select six Pokemon from the pool available from the already finished memory game. With this selection of 6 Pokemon the program would randomly choose the equivalent number of Pokemon (6). The user would select the order of reveal of 6 Pokemon and then the disclose or battle between the types would occur one by one (fire vs water). The number of victorious Pokemon would multiply the score of the user.
+- What was not possible to implement due to a lack of time was a favourite option in which the user would have the possibility to hit a btn to favourite that recipe which would order those fav recipes in first place on the profile page.
+- Another feature not possible to implement was the option to input an youtube recipe url and attach this to the recipe itelses utilizing an iframe the google solution to embedded video from the platform in the website.
 
 ## **Technologies Used**
 
@@ -218,6 +250,7 @@ All the Technologies utilised to built this web app can be found bellow with the
 - [Materialize](https://materializecss.com/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more pre built solutions.
 - [Jinja-Template](https://jinja.palletsprojects.com/en/3.0.x/) was utilized in this project as placeholders in the template allowing writing similar Python code on html files to finally render the final document.
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/) was used in conjunction with Python to build the functional banckend logic of the web app.
+- [Werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) responsabile for harsh the password in secure form to be stored.
 - [MongoDB](https://www.mongodb.com/) is the database for this project where the documents created by user are store as for example the recipes, the user information and food tags.
 - [Git](https://git-scm.com/) was used as tool to control the version of the project.
 - [Git Hub](https://github.com/) to store the project with versionament control
@@ -301,8 +334,28 @@ This solutioned the issue preserving overall good visual for those cards.
 
 This was something really important brought from my mentor in the meetings. This is understandably an important aspect of this project because it brought light to the security aspect of the data being stored in the database by taking care of the url route and information passed through it. So in that way a two layer of security was implemented to preserve or avoid that someone could understand the route for example "delete_recipe/recipe" and or even edit the recipe without being initially authorized to do that.
 
-The two layers implemented were first about checking if there is a user session logged and that solution was possible thanks to Flask. The second layer of protection is related to the check between the user_id logged and the user_id storaged in the recipe collection. This second form of protections works assuring the same user that is trying to delete or update or even getting access to user Profile will be redirect avoiding anyone with the right route and information to have access in something that they would not be allowed to do so.
+The two layers implemented were first about checking if there is a user session logged and that solution was possible thanks to Flask. The second layer of protection is related to the check between the user_id logged and the user_id storaged in the recipe collection. This second form of protections works assuring the same user that is trying to delete or update or even getting access to user Profile will be redirected avoiding anyone with the right route and information to have access in something that they would not be allowed to do so.
 
+So the logic created to implement this was as below:
+```
+if "user" in session:
+        user = mongo.db.users.find_one({"username": session['user']})
+        user_id = ObjectId(user['_id'])
+        recipe = mongo.db.recipes.find_one({"_id": ObjectId(recipe_id)})
+        recipe_user_id = ObjectId(recipe['user_id'])
+
+        if user_id == recipe_user_id:
+```
+
+And for the user profile page a check was implemented to just grab a user logged to change his username for another username. The logic created check if the user session is equal to the user passed through the route:
+```
+def profile(username):
+    if "user" in session:
+
+        if session['user'] == username:
+```
+
+In all the cases above the user is redirected to the login page or to no_authorized page receive a flash message and a link to get back the all recipes page.
 
 ### **Responsiveness**
 
@@ -437,6 +490,7 @@ Code instiute Slack channel was utilised as a referece to solve one bug related 
     {%- endfor -%}
 {%- endif -%}</textarea>
 ```
+The solution for login and log out was implemented utilising the same idea from the mini project which lays on [werkzeug](https://werkzeug.palletsprojects.com/en/2.0.x/) to safally store the users credentials.
 
 ### **Media**
 
