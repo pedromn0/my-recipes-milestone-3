@@ -24,14 +24,17 @@ Finally this project provided to me some interesting outcomes in my learning pro
 1. [Technologies Used](#technologies-used)
 1. [Testing](#testing)
     1. [Mannual Tests and Notable Bugs](#mannual-tests-and-notable-bugs)
-        - [More than three clicks](#more-than-three-clicks)
-        - [Shuffle at any time](#shuffle-at-any-time)
+        - [Empty URL's Picture input form](#empty-url's-picture-input-form)
+        - [Defensive Programming](#defensive-programming)
     1. [Responsiveness](#responsiveness)
 1. [Deployment](#deployment)
+    1. [Creating a Repository and installing Flask](#creating-a-repository-and-installing-flask)
+    1. [Connecting MongoDB to your repository](#connecting-mongodb-to-your-repository)
+    1. [Deploying to Heroku](#deploying-to-heroku)
     1. [Making a Local Clone](#making-a-local-clone)
 1. [Credits](#credits)
-    2. [Media](#media)
-    3. [Acknowledgements](#acknowledgements)
+    1. [Media](#media)
+    1. [Acknowledgements](#acknowledgements)
 
 ## **UX**
 
@@ -157,6 +160,7 @@ The initial design suffered some fewers changes to accommodate better user exper
 9. Register page - a form to collect initial and register the initial user credentials.
     
 ### **Existing Features**
+Below will be possible to take a look in some of the important features of this project.
 
 #### **Base html and Extended usage**
 
