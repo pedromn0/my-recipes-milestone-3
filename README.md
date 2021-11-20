@@ -19,7 +19,7 @@ Finally this project provided to me some interesting outcomes in my learning pro
     1. [Wireframe](#wireframe)
     1. [Database](#Schema)
 1. [Features](#features)
-    1. [Existing Features Explanation](#existing-features-explanation)
+    1. [Existing Features](#existing-features)
     1. [Features Left To Implement](#features-left-to-implement)
 1. [Technologies Used](#technologies-used)
 1. [Testing](#testing)
@@ -119,7 +119,7 @@ The initial design suffered some fewers changes to accommodate better user exper
 
 9. Register page - a form to collect initial and register the initial user credentials.
     
-### Existing Features Explanation
+### Existing Features
 
 #### Base html and Extended usage
 
@@ -358,33 +358,116 @@ This game or website does not provide any console error because all of them were
 
 ### Responsiveness
 
-This project was developed to work majority in bigger screens due to the nature of the game. It is memory game that in essence requires a bigger screen to guarantee a better experience to the user. However the project is responsive to all screens adapting the number of cards as better as possible, but the best experience will be achive on desktop and tablets.
+This project was developed to work in a diverse range of screens. All the components from Materialize and it’s Grid system are responsive and were added to them with personalized CSS to improve their capabilities in delivering a better UX and achieve satisfactory usage. With big screens more information will be shown in more comfortable form by the website having enough responsiveness to scale in small screens.
 
-As explained this project will work fine in at least 3 different sizes Desktop,Tablet and mobile. To achive this the website has been tested on several possible devices, from 11 "or 13" inch Macs, Google Chrome developer tools, variable Android phones of friends and relatives.
+As explained this project will work fine in at least 3 different sizes Desktop,Tablet and mobile. To achieve this the website has been tested on several possible devices, from 11 "or 13" inch Macs, Google Chrome developer tools, variable Android phones of friends and relatives.
 
 ## Deployment
 
-For deploy this project I utilised some of the mentioned technologies above to facilated this process.
+To deploy this project I utilised some of the mentioned technologies above to facilitate this process. This project was deployed on Heroku and connected with MongoDB.
 
-1. The first step were created a repository on GitHub with the name **cardmon-milestone-2**
+### Creating a Repository and installing Flask
+
+1. The first step were created a repository on GitHub with the name **my-recipes-milestone-3**
 2. Installed the **Gitpod** extension for **Google Chrome**;
 3. Linked **Gitpod** gaving **access** to my **GitHub profile** with my login and password;
 4. After that all repositories started to showed the **Gitpod button** just next to the button Code.
 5. Clicking in the **Gitpod button** you have access to the code editor linked with this repository.
-6. After editing the code it was possibble utilising **Git command** (status, add, commit and push) in the **terminal** updated Github repository.
-7. To deploy was necessary went to repository settings and scrolled down untill the options Github pages **check it out here!**
-8. In the link it was necessary went to option **source** and selected the main branch
-9. After that I clicked on the button **save**.
-10. Finally after those steps the link of the webiste was ready to be utilised and the project is live.
+6. On your recent workspace created in the terminal now it is possible to install Flask. It is necessary to input the following command pip3 Install Flask.
+7. You will need to install PyMongo by using the command pip3 install flask-pymongo.
+8. And also install dnspython with the command pip3 install dnspython in the terminal.
+9. The next step is to create a file called requirements.txt in our root folder. The command in the terminal for that is touch requirements.txt.
+
+### Connecting MongoDB to your repository 
+1. First you need to create a free account with [MongoDB](https://www.mongodb.com/).
+2. Once created it will be possible to create a new cluster where the database will be seated.
+3. In our new cluster we then are allowed to create a database by clicking on the button create a new database.
+4. With that and taking in consideration the Schema above it is possible to create all the collections clicking in the button create collection.
+5. After this the next step is crucial, that is get back to the gitpod code editor to create a env.py file where sensitive information will be stored and create a secure connection with the database.
+6. Create a file in the root of the project called env.py and then input those information below but replacing the key values for "SECRET_KEY", "MONGO_URI" and "MONGO_DBNAME " for their respective information.
+```
+import os
+
+os.environ.setdefault("IP", "0.0.0.0")
+os.environ.setdefault("PORT", "5000")
+os.environ.setdefault("SECRET_KEY", ", any secure secret key)
+os.environ.setdefault("MONGO_URI", link provided by Mongo DB in accordance with your database and collections information)
+os.environ.setdefault("MONGO_DBNAME ", name of you database)
+```
+7. It will be necessary as well to create .gitignore file or utilising an already one created and list the env.py inside of this file:
+```
+env.py
+```
+8. The MONGO_URI you can get by accessing your cluster and then clicking on the connect button.
+9. After that you will see an option called "connect your application".
+10. In this case select Python and then copy that link and paste as a key valeu for MONGO_URI and replace **password** and **myFirstDatabase** for your Mongo database password and database name in env.py.
+11. Do not forget to make the same with the respective values for "SECRET_KEY" and "MONGO_DBNAME".
+12. Lastly import the following with an if statement on top of your app.py:
+```
+import os
+if os.path.exists("env.py"):
+    import env
+```
+
+### Deploying to Heroku
+
+1. The next step is to deploy the project for Heroku.
+2. First get back to your gitpod workspace or code editor.
+3. To make sure, first save the necessary requirements in the requirements.txt through the command pip3 freeze --local > requirements.txt 
+4. Create a procfile with the command 'echo web: python app.py > Procfile' without quotes.
+5. Commit those changes to your repository, using git -A, then git commit -m"" and your message and finally git push.
+6. Create a Heroku account.
+7. On your dashboard you can create a new app hitting new and then create a new app.
+8. Choose an app name with dashes -.
+9. Choose a region in this case it was Europe.
+10. To connect the app with Heroku I chose the option connect with Github.
+11. Select the repository name of your project, in my case my-recipes-milestone-3.
+12. Go to settings and in the button reveal config Vars.
+13. Now the values to be filled will need to match with the values stored in env.py.
+```
+("IP", "0.0.0.0")
+("PORT", "5000")
+("SECRET_KEY", ", any secure secret key)
+("MONGO_URI", link provided by Mongo DB in accordance with your database and collections information)
+("MONGO_DBNAME ", name of you database)
+```
+14. In the repository and in app.py it it necessary to use this structure to connect finalise the connection with MonogDB, for that it is necessary to pass the informations from to env.py to app.py in a secure form as this:
+```
+<!-- All the imports necessary  -->
+import os
+from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
+from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
+if os.path.exists("env.py"):
+    import env
+
+<!-- Instances necessary for the connection  -->
+
+app = Flask(__name__)
+
+app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+
+
+mongo = PyMongo(app)
+```
+15. Go back to Heroku and click Enable Automatic deployment, keep the main branch selected and then click in deploy and wait until it finalises the process.
+It is done.
+
 
 ### Making a Local Clone
 
-1. Log in to your [GitHub](https://github.com/), locate the repository [pedromn0/cardmon-milestone-2](https://github.com/pedromn0/cardmon-milestone-2).
+1. Log in to your [GitHub](https://github.com/), locate the repository [pedromn0/my-recipes-milestone-3](https://github.com/pedromn0/my-recipes-milestone-3).
 2. Inside the repository locate the button Code and then click on "Clone or download".
 3. To clone the repository using HTTPS, under "Clone with HTTPS", copy the link.
-4. In your terminal open Git Bash
+4. In your terminal open Git Bash.
 5. Then you can change the current working directory to a directory that suits you in your computer.
 6. Type `git clone`, and then paste the URL you copied earlier.
+
 
 ## Credits
 
