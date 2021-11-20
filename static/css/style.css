@@ -1,3 +1,4 @@
+/* General settings */
 textarea .materialize-textarea {
   white-space: pre-wrap;
 }
@@ -13,6 +14,8 @@ textarea .materialize-textarea {
 .search-row {
     padding-top: 30px;
 }
+
+/* Cards */
 
 .card-image {
     overflow: hidden;
@@ -88,3 +91,10 @@ main {
   .input-field .prefix.active {
     color: #1a237e;
   }
+
+/* Recipe visualisation  */
+@media only screen and (max-width: 600px) {
+  .recipe_name_tag {
+    font-size: medium;
+  }
+}

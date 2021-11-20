@@ -72,8 +72,8 @@ As a result of the above, the concept of the website was idealised taking in con
 
 The initial wireframe consist in: 
 
-1. Navbar with the following options - All Recipes, Profile, Add Recipes, Log in and Log out. Depending on the user in session or not some options will be shown or not.
-2. Sidebar with the following options - All Recipes, Profile, Add Recipes, Log in and Log out. Depending on the user in session or not some options will be shown or not.
+1. Navbar with the following options - All Recipes, Profile, Add Recipes, Log in, Log out and Register. Depending on the user in session or not some options will be shown or not.
+2. Sidebar with the following options - All Recipes, Profile, Add Recipes, Log in, Log out and Register. Depending on the user in session or not some options will be shown or not.
 3. All Recipes home pages consist of a search bar and the all cards that function as quick viewers to the recipes available to everyone. In each card there is a button to access the complete information of the recipe.
 4. Each recipe page has an image, general commentary, list of ingredients, method or preparation, time estimated, food tag and who created that recipe. 
 5. Add recipe consist of the same information provided in the recipe page but in format of a form to be filled and storaged, plus two buttons cancel and add to action that function.
@@ -99,7 +99,7 @@ See in details clicking on this [Mobile Version](static/assets/project_images/wi
 
 ## Features
 
-The initial design suffered some fewers changes to accommodate better user experience and the overal functionality of the app. Below are all the actual functionalities that were possible to implement and those which was not possible to do it.
+The initial design suffered some fewers changes to accommodate better user experience and the overall functionality of the app. Below are all the actual functionalities that were possible to implement and those which were not possible to do it.
  
 1. Navbar & Sidebar for general navigation;
 
@@ -121,20 +121,73 @@ The initial design suffered some fewers changes to accommodate better user exper
     
 ### Existing Features Explanation
 
+#### Base html and Extended usage
+
+The first important feature but one that figures just behind the scenes is the advent of [Jinja-extension](https://jinja.palletsprojects.com/en/3.0.x/templates/?highlight=extend#template-file-extension) which allows a very interesting possibility to create one base html file and then extend its use to all other html templates necessary through the project. This makes easier to implement any update in the html files.
+
+This resource was greatly utilised during the development of this project.
+
+It is possible to block the content you intend to not extend by following the above:
+
+```
+<main class="container">
+    {% block content%}
+
+    {% endblock %}
+</main>
+
+```
+
+Then at the top of each new html file it is necessary to extend the base html:
+
+```
+{% extends "base.html" %}
+{% block content %}
+```
+
 #### Navbar & Sidebar
-- The **Navbar** & **Sidebar** were implemented on this project to complete their functional task to be the main form of navigation through all the possibilities offered by the website. They were designed by Materielize Frame work to  from bootstrap and was eddited in the visual to match the visual identity of the project. This feature allows the user reach links for home, rules and abou it.
 
-    - The **Rules** is a page to explain the simple rules of this game.
+- The **Navbar** & **Sidebar** were implemented on this project to complete their functional task to be the main form of navigation through all the possibilities offered by the website. They were designed by Materialize Framework and edited in the visual to match the identity of this project. This feature allows the user to reach links for All Recipes, Profile, Add Recipes, Log in, Log out and Register.
 
-    - The **About it** it is a briefly explanation of the concept of this project and a link to the github repository.  
+    - If there is no user logged in the navbar will show **All Recipes**, **Log in** and **Register** links.
 
-    - Those **buttons** will give the control of the game.
-        - Clicking on the start will begins the flow of funcitons from request the Pokemon informations with the API until manipulate the DOM and display the cards.
-        - Clicking on restart button will refresh the page and start all over.
-        - Clicking the shuffle button will give a better mix on the cards to guarantee more difficult.
+    - If instead there is an user logged in the links shown will be **All Recipes**, **Add Recipes**, **Profile** and **Log out**.
 
-#### Grid systems
- - The **grid systems** came from the bootstrap to ease the structural part leaving more time for the functional part of the game. The collumns and rows were utilised to comprehend more cards into the same display resulting in 5 cards per row in bigger screens where this game was conceived to be played.
+    This personalised usage in accordance with an user logged or not was possible by an implementation with [Jinja-Template](https://jinja.palletsprojects.com/en/3.0.x/) which empowers the html with logic to check session user a [Flask](https://flask.palletsprojects.com/en/2.0.x/) recourse which allows archiving some information through cookies as the username of the user in question.
+
+    ```
+    {% if session.user %}
+        <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+        <li><a href="{{ url_for('add_recipe') }}">Add Recipe</a></li>
+    {% else %}
+        <li><a href="{{ url_for('login') }}">Log in</a></li>
+    {% endif %}
+    {% if session.user %}
+        <li><a href="{{ url_for('logout') }}">Log out</a></li>
+    {% else %}
+        <li><a href="{{ url_for('register') }}">Register</a></li>
+    {% endif %}
+    ````
+
+#### All Recipes page 
+ In the first place there is a search bar which will look for recipe name or tag name. It is necessary to use the buttons to complete an action such as for finding a recipe pressing the search button or clearing the result bringing back the regular recipes.
+
+These feature was possible thanks to the use of [MongoDB indexes](https://docs.mongodb.com/manual/indexes/) that was created based in the collection recipes but more specifically with the document recipe_name and food_type. 
+
+ ```
+recipe_name_text_food_type_text
+ ```
+
+ Here it is possible to understand the logic to request the information for mongoDB and then bring the result.
+ ```
+ <!-- Request the value in the search bar and then replace in the syntax to search in mongodb -->
+def search():
+    query = request.form.get("query")
+    recipes = mongo.db.recipes.find({"$text": {"$search": query}})
+    food_tags = mongo.db.food_tags.find().sort("food_type", 1)
+ ```
+
+The cards utilized to show the basic information come from [Materialize](https://materializecss.com/cards.html) and they were stylised to being in consonance with the general UX idea. The idealisation of the cards was to summarise the main recipe information in a visual manner. Following this guidance the cards showed the time estimated, name, picture of the recipe, food tag or classification and a link for the full recipe.
 
 #### Cards
  - The **cards** utilised came from bootstrap as well but they were heavily personalised to fit the project criteria’s. Each card is composed for different HTML elements such as:
@@ -164,6 +217,7 @@ All the Technologies utilised to built this web app can be found bellow with the
 
 - [Gitpod](https://www.gitpod.io/) as the code editor.
 - [Materialize](https://materializecss.com/) for all the core HTML sctrucutes as for buttons, navbar, grid system and helpers to deal with less unique CSS rules and more pre built solutions.
+- [Jinja-Template](https://jinja.palletsprojects.com/en/3.0.x/) was utilized in this project as placeholders in the template allowing writing similar Python code on html files to finally render the final document.
 - [Flask](https://flask.palletsprojects.com/en/2.0.x/) was used in conjunction with Python to build the functional banckend logic of the web app.
 - [MongoDB](https://www.mongodb.com/) is the database for this project where the documents created by user are store as for example the recipes, the user information and food tags.
 - [Git](https://git-scm.com/) was used as tool to control the version of the project.
