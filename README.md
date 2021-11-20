@@ -30,7 +30,6 @@ Finally this project provided to me some interesting outcomes in my learning pro
 1. [Deployment](#deployment)
     1. [Making a Local Clone](#making-a-local-clone)
 1. [Credits](#credits)
-    1. [Content](#content)
     2. [Media](#media)
     3. [Acknowledgements](#acknowledgements)
 
@@ -237,32 +236,29 @@ All the results can be seeing below.
 
 Google Lighthouse results:
 <p align="center">
-<img src="assets/images/tests/lightHouse_checker_result.png" width="90%" height="auto">
+<img src="static/assets/tests/lighthouse/lighthouse.png" width="90%" height="auto">
 </p>
 
-W3C Markup for index.html results:
+W3C Markup of all html templates. They were tested and got the same results:
 <p align="center">
-<img src="assets/images/tests/index_checker_result.png" width="90%" height="auto">
-</p>
-
-W3C Markup for rules.html results:
-<p align="center">
-<img src="assets/images/tests/rules_checker_result.png" width="90%" height="auto">
-</p>
-
-W3C Markup for about.html results:
-<p align="center">
-<img src="assets/images/tests/about_checker_result.png" width="90%" height="auto">
+<img src="static/assets/tests/html_validation/home.png" width="90%" height="auto">
 </p>
 
 W3C Jigsaw CSS for style.css results:
 <p align="center">
-<img src="assets/images/tests/css_checker_result.png" width="90%" height="auto">
+<img src="static/assets/tests/css_validation/CSS.png" width="90%" height="auto">
 </p>
 
-Jshin for script.js results:
+The only Javascript utilised in this project was to activate the Materialize components but with Jquery for that reason there is no checker result.
+
+PEP8 Online result before correction for app.py
 <p align="center">
-<img src="assets/images/tests/javascript_checker_result.png" width="90%" height="auto">
+<img src="static/assets/tests/pep8_validation/before.png" width="90%" height="auto">
+</p>
+
+PEP8 Online result after correction for app.py
+<p align="center">
+<img src="static/assets/tests/pep8_validation/after.png" width="90%" height="auto">
 </p>
 
 ### Mannual Tests and Notable Bugs
@@ -471,22 +467,37 @@ It is done.
 
 ## Credits
 
-All the images of pokemon and information utilised for this project were from [PokeAPI](https://pokeapi.co/).
+All images utilised to fill some recipes were taken from the same source the [Jamie Oliver](https://www.jamieoliver.com/) website as the content of the recipes as well.
 
-A significant part of the logical and attempt to block the board of the game came from this project from **Marina Ferreira** and can be accessed from [here](https://marina-ferreira.github.io/tutorials/js/memory-game/). This code was edited and adapted to meet my project criteria.
+A significant part of the main structure code has been written following [Code institute task manager - mini project](https://learn.codeinstitute.net/)
 
-The function responsible to fetch information from API, organize in objects then insert those objects in arrays had inspiration from [this video](https://www.youtube.com/watch?v=T-VQUKeSU1w) but the code had to be edited to works in accordance with my project criteria. The author of the original code is **James Q Quick**.
+A variety of components of this Project came from [Materialize](https://materializecss.com/) as Moodal, Grid sytem, image-cards, pallet of colours, Navbar and SideNav, Footeres, Forms and also some CSS helpers and styles.
 
-The button shuffle contains an function called ramdomPokeArray that was inspired but edited from this [source](https://flaviocopes.com/how-to-shuffle-array-javascript/) from **Flavio Copes**.
+Code instiute Slack channel was utilised as a referece to solve one bug related to how to correct populate a textarea html tag coming from my MongoDB and a collection which is stores data as an array. The ideia is keep each array index as a line inside textarea html tag.
 
-### Content
-- All the contend of this website was created for myself except for all the information presented on the cards that has their source from [PokeAPI](https://pokeapi.co/). 
+```
+<textarea placeholder="One item per line;" id="ingredients_list" name="ingredients_list" class="materialize-textarea">
+
+<!-- This if but not the for loop -->
+{%- if recipe != "NEW" -%} 
+    {%- for ingredient in recipe.ingredients_list -%} 
+        {{ ingredient }} &#13;&#10;
+    {%- endfor -%}
+{%- endif -%}</textarea>
+```
 
 ### Media
-- The images from all Pokemon come from [PokeAPI](https://pokeapi.co/).
+
+- Only one image has a different source, this pciture was utilised as an standard picture in case the user do not paste any Picture URL in the add recipe form. This is the [reference](https://www.pinterest.ie/pin/846395323697472657/) for that image as a source being Pinterest.
+
+<p align="center">
+<img src="https://i.pinimg.com/originals/d9/55/5f/d9555f88a53f6c19ef8acbb2bd679511.jpg" width="40%" height="auto">
+</p>
+
+- [FontAwesome](https://fontawesome.com/) was utilised for all small icons to enhance the visual of the webiste. 
 
 - The Pokeball image utilised called [pokeLogo](https://www.pikpng.com/pngvi/xxRxTm_brik-pixel-art-pokemon-pokeball-clipart/) in the project came from this website https://www.pikpng.com/
 
 ### Acknowledgements
 
-- The inspirations for this project was no special game or website to be mentioned here but all memory cards games already played by me.
+- It is important to note all the support from my mentor Chris Quin which helped me since the beginning to guide me and instruct me through some difficulties.
